@@ -189,9 +189,9 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
+          <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-history"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             歸檔
           </a>
@@ -250,7 +250,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2020/07/14/StripePayment2020714/">
+    <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2020/07/14/2020-07-14-StripePayment/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chihcheng Hsieh">
@@ -269,7 +269,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/07/14/StripePayment2020714/" itemprop="url">Stripe Payment</a></h1>
+                <a class="post-title-link" href="/2020/07/14/2020-07-14-StripePayment/" itemprop="url">Adding Stripe Payment for .NET and Flutter</a></h1>
         
 
         <div class="post-meta">
@@ -344,7 +344,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="https://miro.medium.com/max/770/1*objISxTIwmg6Yhm2A2aVgQ.png" rel="gallery_ckcln4q6e0000lkvsat30gcly"
+                 href="https://miro.medium.com/max/770/1*objISxTIwmg6Yhm2A2aVgQ.png" rel="gallery_ckclqlo89000a9gvsduuof4te"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="https://miro.medium.com/max/770/1*objISxTIwmg6Yhm2A2aVgQ.png" itemprop="contentUrl"/>
               </a>
@@ -359,7 +359,1493 @@
       
         
           
-            <p>Stipe payment test</p>
+            <p><strong>Dart Packages</strong>:</p>
+<ul>
+<li><a href="https://pub.dev/packages/stripe_payment" target="_blank" rel="noopener">[stripe_payment]</a></li>
+</ul>
+<p><strong>NuGet</strong>:</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2018/07/25/2018-07-25-Applying_SAGAN_on_SuperResolution/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chihcheng Hsieh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/37566901?s=460&u=6470cf904f049c5a33f779091a8fea004c338621&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Richard Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/25/2018-07-25-Applying_SAGAN_on_SuperResolution/" itemprop="url">Applying SAGAN on Super Resolution</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-07-25T00:00:00+10:00">
+                2018-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DL/" itemprop="url" rel="index">
+                    <span itemprop="name">DL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+
+<p>[<a href="https://arxiv.org/pdf/1609.04802.pdf" target="_blank" rel="noopener">SRGAN paper</a>]<br>[<a href="https://arxiv.org/pdf/1805.08318.pdf" target="_blank" rel="noopener">SAGAN paper</a>]<br>[<a href="https://github.com/ChihchengHsieh/Applying-SAGAN-on-Super-Resolution" target="_blank" rel="noopener">Implementation</a>]</p>
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><p>Generated image -&gt; input image -&gt; Ground Truth<br><img src="https://github.com/ChihchengHsieh/Applying-SAGAN-on-Super-Resolution/blob/master/SR_samplesPh.png?raw=true" alt=""><br><img src="https://github.com/ChihchengHsieh/Applying-SAGAN-on-Super-Resolution/blob/master/SR_loss.png?raw=true" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2018/07/25/2018-07-25-Glow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chihcheng Hsieh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/37566901?s=460&u=6470cf904f049c5a33f779091a8fea004c338621&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Richard Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/25/2018-07-25-Glow/" itemprop="url">Glow</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-07-25T00:00:00+10:00">
+                2018-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DL/" itemprop="url" rel="index">
+                    <span itemprop="name">DL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://github.com/ChihchengHsieh/Glow/blob/master/img/GlowStPh.png?raw=true" rel="gallery_ckclqltrx000p9gvs7ou96y69"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://github.com/ChihchengHsieh/Glow/blob/master/img/GlowStPh.png?raw=true" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        
+          
+            <a id="more"></a>
+
+
+
+<p>[<a href="https://arxiv.org/pdf/1410.8516.pdf" target="_blank" rel="noopener">NICE: NON-LINEAR INDEPENDENT COMPONENTS ESTIMATION</a>]</p>
+<p>[<a href="https://arxiv.org/pdf/1807.03039.pdf" target="_blank" rel="noopener">Glow: Generative Flow with Invertible 1×1 Convolutions</a>]</p>
+<p>[<a href="https://arxiv.org/pdf/1605.08803.pdf" target="_blank" rel="noopener">DENSITY ESTIMATION USING REAL NVP</a>]</p>
+<p>[<a href="https://blog.openai.com/glow/" target="_blank" rel="noopener">OpenAI Blog</a>]</p>
+<p>[<a href="https://github.com/chaiyujin/glow-pytorch" target="_blank" rel="noopener">Code from</a>]</p>
+<p>[<a href="https://github.com/ChihchengHsieh/Glow" target="_blank" rel="noopener">Implementation</a>]</p>
+<h2 id="Papers"><a href="#Papers" class="headerlink" title="Papers"></a>Papers</h2><p><img src="https://github.com/ChihchengHsieh/Glow/blob/master/img/PapersPh.png?raw=true" alt=""></p>
+<h2 id="Training-results"><a href="#Training-results" class="headerlink" title="Training_results"></a>Training_results</h2><p><img src="https://github.com/ChihchengHsieh/Glow/blob/master/img/TrainingHist.png?raw=true" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2018/07/07/2018-07-07-SAGAN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chihcheng Hsieh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/37566901?s=460&u=6470cf904f049c5a33f779091a8fea004c338621&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Richard Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/07/2018-07-07-SAGAN/" itemprop="url">SAGAN and Applying on BEGAN</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-07-07T00:00:00+10:00">
+                2018-07-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DL/" itemprop="url" rel="index">
+                    <span itemprop="name">DL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://github.com/ChihchengHsieh/SAGAN/blob/master/SAGAN/Screen%20Shot%202018-07-07%20at%207.29.11%20pm.png?raw=true" rel="gallery_ckclqltrr000f9gvse1wg5ewv"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://github.com/ChihchengHsieh/SAGAN/blob/master/SAGAN/Screen%20Shot%202018-07-07%20at%207.29.11%20pm.png?raw=true" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        
+          
+            <a id="more"></a>
+
+
+<p>[<a href="https://arxiv.org/pdf/1805.08318.pdf" target="_blank" rel="noopener">SAGAN Paper</a>][<a href="https://github.com/ChihchengHsieh/SAGAN" target="_blank" rel="noopener">Implementation</a>]</p>
+<h1 id="SAGAN"><a href="#SAGAN" class="headerlink" title="SAGAN"></a>SAGAN</h1><p><img src="https://github.com/ChihchengHsieh/SAGAN/blob/master/SAGAN/Screen%20Shot%202018-07-07%20at%207.06.44%20pm.png?raw=true" alt=""></p>
+<h1 id="Applying-on-the-BEGAN"><a href="#Applying-on-the-BEGAN" class="headerlink" title="Applying on the BEGAN"></a>Applying on the BEGAN</h1><p><img src="https://github.com/ChihchengHsieh/SAGAN/blob/master/SABEGAN/Screen%20Shot%202018-07-07%20at%206.44.47%20pm.png?raw=true" alt=""></p>
+<p><img src="https://github.com/ChihchengHsieh/SAGAN/blob/master/SABEGAN/Screen%20Shot%202018-07-07%20at%206.57.38%20pm.png?raw=true" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2018/07/05/2018-07-05-BEGAN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chihcheng Hsieh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/37566901?s=460&u=6470cf904f049c5a33f779091a8fea004c338621&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Richard Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/05/2018-07-05-BEGAN/" itemprop="url">BEGAN</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-07-05T00:00:00+10:00">
+                2018-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DL/" itemprop="url" rel="index">
+                    <span itemprop="name">DL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://github.com/ChihchengHsieh/BE-ACGAN/blob/master/BEGAN/BEGANStructure.png?raw=true" rel="gallery_ckclqlts6001a9gvs8w670l90"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://github.com/ChihchengHsieh/BE-ACGAN/blob/master/BEGAN/BEGANStructure.png?raw=true" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        
+          
+            <a id="more"></a>
+
+<p>[<a href="https://arxiv.org/pdf/1703.10717.pdf" target="_blank" rel="noopener">BEGAN Paper</a>][<a href="https://github.com/ChihchengHsieh/BE-ACGAN" target="_blank" rel="noopener">Implementation</a>]</p>
+<h1 id="Paper"><a href="#Paper" class="headerlink" title="Paper"></a>Paper</h1><p><img src="https://github.com/ChihchengHsieh/BE-ACGAN/blob/master/BEGAN/BEGANPaper.png?raw=true" alt=""></p>
+<h1 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h1><p><img src="https://github.com/ChihchengHsieh/BE-ACGAN/blob/master/BEGAN/Results.png?raw=true" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2018/07/05/2018-07-05-ACGAN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chihcheng Hsieh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/37566901?s=460&u=6470cf904f049c5a33f779091a8fea004c338621&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Richard Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/05/2018-07-05-ACGAN/" itemprop="url">ACGAN</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-07-05T00:00:00+10:00">
+                2018-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DL/" itemprop="url" rel="index">
+                    <span itemprop="name">DL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://github.com/ChihchengHsieh/BE-ACGAN/blob/master/ACGAN/ACStructure.png?raw=true" rel="gallery_ckclqlts7001c9gvs39d5b0dw"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://github.com/ChihchengHsieh/BE-ACGAN/blob/master/ACGAN/ACStructure.png?raw=true" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        
+          
+            <a id="more"></a>
+
+<p>[<a href="https://arxiv.org/pdf/1610.09585.pdf" target="_blank" rel="noopener">ACGAN Paper</a>][<a href="https://github.com/ChihchengHsieh/BE-ACGAN" target="_blank" rel="noopener">Implementation</a>]</p>
+<h1 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h1><p><img src="https://github.com/ChihchengHsieh/BE-ACGAN/blob/master/ACGAN/Results.png?raw=true" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2018/07/04/2018-07-04-cLSDCGAN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chihcheng Hsieh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/37566901?s=460&u=6470cf904f049c5a33f779091a8fea004c338621&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Richard Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/04/2018-07-04-cLSDCGAN/" itemprop="url">cLSDCGAN</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-07-04T00:00:00+10:00">
+                2018-07-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DL/" itemprop="url" rel="index">
+                    <span itemprop="name">DL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://github.com/ChihchengHsieh/cLSDCGAN/blob/master/Img/Structure.png?raw=true" rel="gallery_ckclqlts500199gvsfvdzeire"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://github.com/ChihchengHsieh/cLSDCGAN/blob/master/Img/Structure.png?raw=true" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        
+          
+            <a id="more"></a>
+
+
+<p>[<a href="https://arxiv.org/pdf/1511.06434.pdf" target="_blank" rel="noopener">DCGAN Paper</a>][<a href="https://arxiv.org/pdf/1611.04076.pdf" target="_blank" rel="noopener">LSGAN Paper</a>][<a href="https://github.com/ChihchengHsieh/cLSDCGAN" target="_blank" rel="noopener">Implementation</a>]</p>
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><h3 id="After-1500-steps"><a href="#After-1500-steps" class="headerlink" title="After 1500 steps"></a>After 1500 steps</h3><p><img src="https://github.com/ChihchengHsieh/cLSDCGAN/blob/master/Img/1500.png?raw=true" alt=""></p>
+<h3 id="After-1200-steps-Patch-vs-Normal"><a href="#After-1200-steps-Patch-vs-Normal" class="headerlink" title="After 1200 steps (Patch vs Normal)"></a>After 1200 steps (Patch vs Normal)</h3><p><img src="https://github.com/ChihchengHsieh/cLSDCGAN/blob/master/Img/1200.png?raw=true" alt=""></p>
+<h3 id="Comparison-of-Upsample-and-Deconv"><a href="#Comparison-of-Upsample-and-Deconv" class="headerlink" title="Comparison of Upsample and Deconv"></a>Comparison of Upsample and Deconv</h3><p><img src="https://github.com/ChihchengHsieh/cLSDCGAN/blob/master/Img/DeconvAndUpsample.png?raw=true" alt=""></p>
+<h3 id="LS-Loss"><a href="#LS-Loss" class="headerlink" title="LS Loss"></a>LS Loss</h3><p><img src="https://github.com/ChihchengHsieh/cLSDCGAN/blob/master/Img/LS.png?raw=true" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2018/07/02/2018-07-02-GloballyandLocallyConsistentImageCompletion/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chihcheng Hsieh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/37566901?s=460&u=6470cf904f049c5a33f779091a8fea004c338621&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Richard Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/02/2018-07-02-GloballyandLocallyConsistentImageCompletion/" itemprop="url">Globally and Locally Consistent Image Completion</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-07-02T00:00:00+10:00">
+                2018-07-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DL/" itemprop="url" rel="index">
+                    <span itemprop="name">DL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://github.com/mike820808/tf_Globally_and_Locally_Consistent_Image_Completion/blob/master/Photo/PaperStructure.png?raw=true" rel="gallery_ckclqlts100119gvs77hvdnfm"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://github.com/mike820808/tf_Globally_and_Locally_Consistent_Image_Completion/blob/master/Photo/PaperStructure.png?raw=true" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        
+          
+            <a id="more"></a>
+
+<p>[<a href="http://hi.cs.waseda.ac.jp/~iizuka/projects/completion/en/" target="_blank" rel="noopener">Paper</a>][<a href="https://github.com/ChihchengHsieh/Globally_and_Locally_Consistent_Image_Completion" target="_blank" rel="noopener">My minimal pytorch implementation</a>]</p>
+<h1 id="What’s-different"><a href="#What’s-different" class="headerlink" title="What’s different?"></a>What’s different?</h1><ul>
+<li>Move the model to Pytorch</li>
+<li>Using High Level API (tf.layers/tf.contrib)</li>
+<li>add batch normalisation after dilated CNN<img src="https://github.com/mike820808/tf_Globally_and_Locally_Consistent_Image_Completion/blob/master/Photo/BN.png?raw=true" alt="img" width="500" height="150"></li>
+<li>This model run on 64x64 size images</li>
+<li>The structure of model has been changed a liitle bit since the smaller size image</li>
+<li>Add the sigmoid function in the last layer of Completion</li>
+</ul>
+<h1 id="Paper-Structure"><a href="#Paper-Structure" class="headerlink" title="Paper Structure"></a>Paper Structure</h1><img src="https://github.com/mike820808/tf_Globally_and_Locally_Consistent_Image_Completion/blob/master/Photo/PaperC.png?raw=true" alt="img" width="325" height="300">
+<img src="https://github.com/mike820808/tf_Globally_and_Locally_Consistent_Image_Completion/blob/master/Photo/PaperD.png?raw=true" alt="img" width="350" height="300">
+
+<h1 id="Paper-optimization"><a href="#Paper-optimization" class="headerlink" title="Paper optimization"></a>Paper optimization</h1><img src="https://github.com/mike820808/tf_Globally_and_Locally_Consistent_Image_Completion/blob/master/Photo/Optim.png?raw=true" alt="img" width="350" height="300">
+
+<h1 id="The-structure-for-this-model"><a href="#The-structure-for-this-model" class="headerlink" title="The structure for this model"></a>The structure for this model</h1><p><img src="https://github.com/mike820808/tf_Globally_and_Locally_Consistent_Image_Completion/blob/master/Photo/Sructure.png?raw=true" alt=""></p>
+<h1 id="The-result-after-only-20-steps-5-minutes"><a href="#The-result-after-only-20-steps-5-minutes" class="headerlink" title="The result after only 20 steps (5 minutes)"></a>The result after only 20 steps (5 minutes)</h1><p>&lt;- Yeah .. I mean 5 min on CPU…</p>
+<p>The generator has started to do something we want. The reason may be the reconstructed loss, which enables us to train it as a decoder.</p>
+<p><img src="https://github.com/mike820808/tf_Globally_and_Locally_Consistent_Image_Completion/blob/master/Photo/20%20epoch%20result.png?raw=true" alt=""></p>
+<p>And, the paper they trained</p>
+<img src="https://github.com/mike820808/Globally_and_Locally_Consistent_Image_Completion/blob/master/Photo/Training_time.png?raw=true" alt="img" width="500" height="60">
+
+
+<h1 id="Still-wondering"><a href="#Still-wondering" class="headerlink" title="Still wondering"></a>Still wondering</h1><p>Which way of initialization will be better for this model?</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2018/07/02/2018-07-02-InfoGAN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chihcheng Hsieh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/37566901?s=460&u=6470cf904f049c5a33f779091a8fea004c338621&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Richard Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/02/2018-07-02-InfoGAN/" itemprop="url">InfoGAN</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-07-02T00:00:00+10:00">
+                2018-07-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DL/" itemprop="url" rel="index">
+                    <span itemprop="name">DL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://github.com/ChihchengHsieh/InfoGAN/blob/master/imgs/2.png?raw=true" rel="gallery_ckclqlts200129gvs3cmy3vg2"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://github.com/ChihchengHsieh/InfoGAN/blob/master/imgs/2.png?raw=true" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        
+          
+            <a id="more"></a>
+
+
+<p>[<a href="https://arxiv.org/pdf/1606.03657.pdf" target="_blank" rel="noopener">Paper</a>][<a href="https://github.com/ChihchengHsieh/InfoGAN" target="_blank" rel="noopener">My minimal pytorch implementation</a>]</p>
+<h2 id="Training-Progress"><a href="#Training-Progress" class="headerlink" title="Training Progress"></a>Training Progress</h2><h5 id="Generated-img-After-5000-10000-28000-Steps"><a href="#Generated-img-After-5000-10000-28000-Steps" class="headerlink" title="Generated img After (5000, 10000, 28000) Steps"></a>Generated img After (5000, 10000, 28000) Steps</h5><p><img src="https://github.com/ChihchengHsieh/InfoGAN/blob/master/imgs/5.png?raw=true" alt=""></p>
+<h5 id="Adjusting-Continuous-C-After-5000-10000-28000-Steps"><a href="#Adjusting-Continuous-C-After-5000-10000-28000-Steps" class="headerlink" title="Adjusting Continuous C After (5000, 10000, 28000) Steps"></a>Adjusting Continuous C After (5000, 10000, 28000) Steps</h5><p><img src="https://github.com/ChihchengHsieh/InfoGAN/blob/master/imgs/4.png?raw=true" alt=""></p>
+<h5 id="Adjusting-Categorial-C-After-5000-10000-28000-Steps"><a href="#Adjusting-Categorial-C-After-5000-10000-28000-Steps" class="headerlink" title="Adjusting Categorial C After (5000, 10000, 28000) Steps"></a>Adjusting Categorial C After (5000, 10000, 28000) Steps</h5><p><img src="https://github.com/ChihchengHsieh/InfoGAN/blob/master/imgs/3.png?raw=true" alt=""></p>
+<h2 id="Loss-in-Training"><a href="#Loss-in-Training" class="headerlink" title="Loss in Training"></a>Loss in Training</h2><p><img src="https://github.com/ChihchengHsieh/InfoGAN/blob/master/imgs/6.png?raw=true" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2018/07/02/2018-07-02-AttnGAN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chihcheng Hsieh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/37566901?s=460&u=6470cf904f049c5a33f779091a8fea004c338621&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Richard Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/02/2018-07-02-AttnGAN/" itemprop="url">AttnGAN</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-07-02T00:00:00+10:00">
+                2018-07-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DL/" itemprop="url" rel="index">
+                    <span itemprop="name">DL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://github.com/ChihchengHsieh/AttnGAN_Implementation/blob/master/Img/Structure.png?raw=true" rel="gallery_ckclqltrz000t9gvs2rf3gdoi"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://github.com/ChihchengHsieh/AttnGAN_Implementation/blob/master/Img/Structure.png?raw=true" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        
+          
+            <a id="more"></a>
+
+<p>========</p>
+<p>[<a href="https://arxiv.org/pdf/1711.10485.pdf" target="_blank" rel="noopener">Paper</a>][<a href="https://github.com/taoxugit/AttnGAN" target="_blank" rel="noopener">Code</a>][<a href="https://github.com/ChihchengHsieh/AttnGAN_Implementation" target="_blank" rel="noopener">My minimal pytorch implementation</a>]</p>
+<h1 id="Interesting-DAMSM-Loss-functions"><a href="#Interesting-DAMSM-Loss-functions" class="headerlink" title="Interesting DAMSM Loss functions"></a>Interesting DAMSM Loss functions</h1><img src="https://github.com/ChihchengHsieh/AttnGAN_Implementation/blob/master/Img/loss-3.png?raw=true" alt="img" width="300" height="200">
+
+<img src="https://github.com/ChihchengHsieh/AttnGAN_Implementation/blob/master/Img/loss-1.png?raw=true" alt="img" width="300" height="150">
+
+<img src="https://github.com/ChihchengHsieh/AttnGAN_Implementation/blob/master/Img/loss-2.png?raw=true" alt="img" width="300" height="60">
+
+
+<h1 id="In-terms-of-the-running-time"><a href="#In-terms-of-the-running-time" class="headerlink" title="In terms of the running time.."></a>In terms of the running time..</h1><p>It took more than 1 minute to finish a batch of data. And, the batch size is 2. So, it’s definitely not a toy for my laptop.<br><img src="https://github.com/ChihchengHsieh/AttnGAN_Implementation/blob/master/Img/runningtime.png?raw=true" alt="img" width="500" height="35"></p>
 
           
         
@@ -398,6 +1884,10 @@
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
+  </nav>
+
 
 
           </div>
@@ -443,9 +1933,9 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%7C%7C%20history">
+                <a href="/archives">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">文章</span>
                 </a>
               </div>
@@ -456,7 +1946,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分類</span>
                 </a>
               </div>
@@ -467,7 +1957,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">標籤</span>
                 </a>
               </div>
