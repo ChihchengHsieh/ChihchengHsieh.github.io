@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-tw">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Flutter,.NET," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="The stripe implementation on .NET and flutter. Payment methods includes Native Pay and Credit Card.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在 Flutter 中加入購物車的功能">
+<meta property="og:url" content="https://chihchenghsieh.github.io/2020/07/16/2020-07-16-AddingShoppingCart/index.html">
+<meta property="og:site_name" content="Chicheng&#39;s Tech">
+<meta property="og:description" content="The stripe implementation on .NET and flutter. Payment methods includes Native Pay and Credit Card.">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://trello-attachments.s3.amazonaws.com/5f088e4f109e0a21e54dcaf6/669x1375/ddc0a771de7211a226ea3f04d142add9/media_temp%283%29.jpg">
+<meta property="article:published_time" content="2020-07-15T14:52:38.986Z">
+<meta property="article:modified_time" content="2020-07-16T15:19:26.457Z">
+<meta property="article:author" content="Chihcheng Hsieh">
+<meta property="article:tag" content="Flutter">
+<meta property="article:tag" content=".NET">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://trello-attachments.s3.amazonaws.com/5f088e4f109e0a21e54dcaf6/669x1375/ddc0a771de7211a226ea3f04d142add9/media_temp%283%29.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chihchenghsieh.github.io/2020/07/16/2020-07-16-AddingShoppingCart/"/>
+
+
+
+
+
+  <title>在 Flutter 中加入購物車的功能 | Chicheng's Tech</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chicheng's Tech</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Tech Play Ground</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-list"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2020/07/16/2020-07-16-AddingShoppingCart/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chihcheng Hsieh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/37566901?s=460&u=6470cf904f049c5a33f779091a8fea004c338621&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chicheng's Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">在 Flutter 中加入購物車的功能</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2020-07-16T00:52:38+10:00">
+                2020-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/App-Development/" itemprop="url" rel="index">
+                    <span itemprop="name">App Development</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  The stripe implementation on .NET and flutter. Payment methods includes Native Pay and Credit Card.
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://trello-attachments.s3.amazonaws.com/5f088e4f109e0a21e54dcaf6/669x1375/ddc0a771de7211a226ea3f04d142add9/media_temp%283%29.jpg" rel="gallery_ckcoxvx6h00008wvs6gs0hhnb"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://trello-attachments.s3.amazonaws.com/5f088e4f109e0a21e54dcaf6/669x1375/ddc0a771de7211a226ea3f04d142add9/media_temp%283%29.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <h1 id="用到的Package"><a href="#用到的Package" class="headerlink" title="用到的Package:"></a>用到的Package:</h1><p><a href="https://pub.dev/packages/shared_preferences" target="_blank" rel="noopener">[sahred_preferences]</a></p>
+<h1 id="實作"><a href="#實作" class="headerlink" title="實作:"></a>實作:</h1><h2 id="概念介紹"><a href="#概念介紹" class="headerlink" title="概念介紹"></a>概念介紹</h2><p>使用SharedPrefrence將一個 <code>{&quot;ProductItemId&quot;: Quantity}</code> 的 <code>Map&lt;String,int&gt;</code> 利用 <code>json.encode()</code> 和 <code>json.decode()</code> 來存取在Local. 當需要使用的時候再取得所有的Key來Request所有的商品來顯示.</p>
+<h2 id="用到的Class"><a href="#用到的Class" class="headerlink" title="用到的Class"></a>用到的Class</h2><p><strong>Product</strong>是用來存取通用的產品資料, 例如品名和產品介紹; <strong>ProductItem</strong> 則是用來存取不同的品項, 例如Size和Color.</p>
+<ul>
+<li>Product</li>
+<li>ProductItem</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Product</span></span>&#123;</span><br><span class="line">  <span class="built_in">String</span> id;</span><br><span class="line">  <span class="built_in">String</span> name;</span><br><span class="line">  <span class="built_in">String</span> description;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Image urls for showing the product.</span></span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; imageUrls;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Variants of the product. (ex: Different colors) </span></span><br><span class="line">  <span class="built_in">List</span>&lt;ProductItem&gt; productItems;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ProductItem</span> </span>&#123;</span><br><span class="line">  <span class="built_in">String</span> id;</span><br><span class="line">  Product belongProduct;</span><br><span class="line">  <span class="built_in">String</span> itemName;</span><br><span class="line">  <span class="built_in">double</span> price;</span><br><span class="line">  <span class="built_in">int</span> totalQuantity;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// With these two class, we can create...</span></span><br><span class="line"></span><br><span class="line">Product newCloth = Product(</span><br><span class="line">    name: <span class="string">"T-Shirt"</span></span><br><span class="line">    description: <span class="string">"Highest quality with lowest price you can get."</span></span><br><span class="line">    imageUrls: [</span><br><span class="line">        <span class="string">"www.abc.com/12345.png"</span>,</span><br><span class="line">        <span class="string">"www.abc.com/67890.png"</span></span><br><span class="line">    ],</span><br><span class="line">    productItems: [</span><br><span class="line">        ProductItem(</span><br><span class="line">            itemName: <span class="string">"Yellow"</span></span><br><span class="line">            price: <span class="number">14.5</span>,</span><br><span class="line">            totalQuantity: <span class="number">50</span>,</span><br><span class="line">        ),</span><br><span class="line">        ProductItem(</span><br><span class="line">            itemName: <span class="string">"Black"</span></span><br><span class="line">            price: <span class="number">17.9</span>,</span><br><span class="line">            totalQuantity: <span class="number">20</span>,</span><br><span class="line">        ),</span><br><span class="line">    ]</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="功能實作"><a href="#功能實作" class="headerlink" title="功能實作"></a>功能實作</h2><p>實作的功能並不複雜, 大部分只是類似經典的CRUD, 只是施作地點是在客戶端。</p>
+<h3 id="取得-Getter-和設置-Setter-購物車-使用SharedPreference"><a href="#取得-Getter-和設置-Setter-購物車-使用SharedPreference" class="headerlink" title="取得(Getter)和設置(Setter)購物車(使用SharedPreference)"></a>取得(Getter)和設置(Setter)購物車(使用SharedPreference)</h3><h4 id="設置-Set"><a href="#設置-Set" class="headerlink" title="設置(Set)"></a>設置(Set)</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="built_in">bool</span>&gt; setShoppingCartMap(</span><br><span class="line">   SharedPreferences prefs,</span><br><span class="line">   <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; shoppingCartMap,</span><br><span class="line"> ) <span class="keyword">async</span> &#123;</span><br><span class="line">   <span class="built_in">bool</span> success = <span class="keyword">await</span> prefs.setString(</span><br><span class="line">       Env.orderShoppingCartSharedPreferenceStoringString,</span><br><span class="line">       json.encode(shoppingCartMap));</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (!success)</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">throw</span> Exception(</span><br><span class="line">      <span class="string">"Shopping can't be saved"</span>,</span><br><span class="line">     );</span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="取得-Get"><a href="#取得-Get" class="headerlink" title="取得(Get)"></a>取得(Get)</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; getShoppingCartMap(SharedPreferences prefs) &#123;</span><br><span class="line">  <span class="built_in">String</span> productItemsString =</span><br><span class="line">      prefs.getString(Env.orderShoppingCartSharedPreferenceStoringString) ??</span><br><span class="line">          <span class="string">"&#123;&#125;"</span>;</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; shoppingCartMap = <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt;.from(</span><br><span class="line">    json.decode(productItemsString),</span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">return</span> shoppingCartMap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有這兩個最基本與購物車互動的方法後, 我們可以用這兩個基本的方法去建造CRUD.</p>
+<h3 id="將ProductItem加入購物車"><a href="#將ProductItem加入購物車" class="headerlink" title="將ProductItem加入購物車"></a>將ProductItem加入購物車</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt;&gt; addProductItemToShoppingCart(</span><br><span class="line">    ProductItem productItemToAdd,</span><br><span class="line">    <span class="built_in">int</span> quantity,</span><br><span class="line">  ) <span class="keyword">async</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> prefs = <span class="keyword">await</span> SharedPreferences.getInstance();</span><br><span class="line">    <span class="built_in">Map</span> shoppingCartMap = getShoppingCartMap(prefs);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Checking if it contian the productItem has already in the shopping cart..</span></span><br><span class="line">    <span class="built_in">bool</span> alreadyInShoppingCart =</span><br><span class="line">        shoppingCartMap.containsKey(productItemToAdd.id);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (alreadyInShoppingCart) &#123;</span><br><span class="line">      shoppingCartMap[productItemToAdd.id] += quantity;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      shoppingCartMap[productItemToAdd.id] = quantity;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Store back to prefs;</span></span><br><span class="line">    <span class="built_in">bool</span> saveSuccessfully = <span class="keyword">await</span> setShoppingCartMap(prefs, shoppingCartMap);</span><br><span class="line">    <span class="keyword">return</span> saveSuccessfully ? shoppingCartMap : <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="在購物車內修改數量-Quantity"><a href="#在購物車內修改數量-Quantity" class="headerlink" title="在購物車內修改數量(Quantity)"></a>在購物車內修改數量(Quantity)</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt;&gt; updateProductItemQuantityInShoppingCart(</span><br><span class="line">  <span class="built_in">String</span> productItemIdToRemove,</span><br><span class="line">  <span class="built_in">int</span> quantity,</span><br><span class="line">) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">final</span> prefs = <span class="keyword">await</span> SharedPreferences.getInstance();</span><br><span class="line">  <span class="built_in">Map</span> shoppingCartMap = getShoppingCartMap(prefs);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Checking if it contian the productItem already.</span></span><br><span class="line">  <span class="built_in">bool</span> inShoppingCart = shoppingCartMap.containsKey(productItemIdToRemove);</span><br><span class="line">  <span class="keyword">if</span> (!inShoppingCart)</span><br><span class="line">    <span class="comment">//  "Product item is not in the shopping cart. Add product item to shopping cart first"</span></span><br><span class="line">    <span class="keyword">throw</span> Exception(</span><br><span class="line">      <span class="string">"Item is not in the shopping cart."</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (quantity &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    shoppingCartMap[productItemIdToRemove] = quantity;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// Removing the product item from shopping cart if given value is negative.; </span></span><br><span class="line">    shoppingCartMap.remove(productItemIdToRemove);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Store back to pref;</span></span><br><span class="line">  <span class="built_in">bool</span> saveSuccessfully = <span class="keyword">await</span> setShoppingCartMap(prefs, shoppingCartMap);</span><br><span class="line">  <span class="keyword">return</span> saveSuccessfully ? shoppingCartMap : <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="刪除單項ProductItem"><a href="#刪除單項ProductItem" class="headerlink" title="刪除單項ProductItem"></a>刪除單項ProductItem</h3><p>我們可以利用上個Function來執行這項指令</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt;&gt; removeProudctItemFromShoppingCart(</span><br><span class="line">  <span class="built_in">String</span> productItemIdToRemove,</span><br><span class="line">) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> updateProductItemQuantityInShoppingCart(</span><br><span class="line">      productItemIdToRemove, <span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="清空購物車"><a href="#清空購物車" class="headerlink" title="清空購物車"></a>清空購物車</h3><p>直接將Shopping cart這個Map抹除掉.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="built_in">bool</span>&gt; emptyShoppingCart() <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">final</span> prefs = <span class="keyword">await</span> SharedPreferences.getInstance();</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> prefs.remove(shoppingCartSotringString);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="顯示購物車"><a href="#顯示購物車" class="headerlink" title="顯示購物車"></a>顯示購物車</h3><p>要顯示購物車 我們需要一個新的Class來存 </p>
+<ul>
+<li>ProductItem</li>
+<li>Quantity</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ShoppingCartResult</span> </span>&#123;</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; shoppingCartMap;</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, ProductItem&gt; productItemsMap;</span><br><span class="line"></span><br><span class="line">  ShoppingCartResult(&#123;</span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.shoppingCartMap,</span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.productItemsMap,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">factory</span> ShoppingCartResult.fromProductItemList(</span><br><span class="line">      <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; shoppingCartMap, <span class="built_in">List</span>&lt;ProductItem&gt; productItemList) &#123;</span><br><span class="line">    <span class="keyword">return</span> ShoppingCartResult(</span><br><span class="line">      shoppingCartMap: shoppingCartMap,</span><br><span class="line">      productItemsMap: <span class="built_in">Map</span>.fromIterable(</span><br><span class="line">        shoppingCartMap.keys.map(</span><br><span class="line">          (k) =&gt; &#123;</span><br><span class="line">            k: productItemList.firstWhere((i) =&gt; i.id == k),</span><br><span class="line">          &#125;,</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">          </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Future&lt;ShoppingCartResult&gt; getProductItemsInShoppingCart(</span><br><span class="line">  BuildContext context,</span><br><span class="line">) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">final</span> prefs = <span class="keyword">await</span> SharedPreferences.getInstance();</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; shoppingCartMap = getShoppingCartMap(prefs);</span><br><span class="line"></span><br><span class="line">  ShoppingCartResult result = ShoppingCartResult.fromProductItemList(</span><br><span class="line">    shoppingCartMap,</span><br><span class="line">    shoppingCartMap?.keys?.toList()?.isNotEmpty == <span class="keyword">true</span></span><br><span class="line">          <span class="comment">// Functions to retrieve the productItems from server.</span></span><br><span class="line">        ? <span class="keyword">await</span> context</span><br><span class="line">            .read&lt;ProductService&gt;()</span><br><span class="line">            .getProductItemsFromListOfItemIds(</span><br><span class="line">              context,</span><br><span class="line">              shoppingCartMap.keys.toList(),</span><br><span class="line">            )</span><br><span class="line">        : [],</span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Flutter/" rel="tag"># Flutter</a>
+          
+            <a href="/tags/NET/" rel="tag"># .NET</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/14/2020-07-14-StripePayment/" rel="next" title="Stripe Payment for .NET and Flutter">
+                <i class="fa fa-chevron-left"></i> Stripe Payment for .NET and Flutter
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://avatars0.githubusercontent.com/u/37566901?s=460&u=6470cf904f049c5a33f779091a8fea004c338621&v=4"
+                alt="Chihcheng Hsieh" />
+            
+              <p class="site-author-name" itemprop="name">Chihcheng Hsieh</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分類</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">標籤</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ChihchengHsieh" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#用到的Package"><span class="nav-number">1.</span> <span class="nav-text">用到的Package:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#實作"><span class="nav-number">2.</span> <span class="nav-text">實作:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念介紹"><span class="nav-number">2.1.</span> <span class="nav-text">概念介紹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用到的Class"><span class="nav-number">2.2.</span> <span class="nav-text">用到的Class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#功能實作"><span class="nav-number">2.3.</span> <span class="nav-text">功能實作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#取得-Getter-和設置-Setter-購物車-使用SharedPreference"><span class="nav-number">2.3.1.</span> <span class="nav-text">取得(Getter)和設置(Setter)購物車(使用SharedPreference)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#設置-Set"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">設置(Set)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#取得-Get"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">取得(Get)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#將ProductItem加入購物車"><span class="nav-number">2.3.2.</span> <span class="nav-text">將ProductItem加入購物車</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在購物車內修改數量-Quantity"><span class="nav-number">2.3.3.</span> <span class="nav-text">在購物車內修改數量(Quantity)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#刪除單項ProductItem"><span class="nav-number">2.3.4.</span> <span class="nav-text">刪除單項ProductItem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#清空購物車"><span class="nav-number">2.3.5.</span> <span class="nav-text">清空購物車</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#顯示購物車"><span class="nav-number">2.3.6.</span> <span class="nav-text">顯示購物車</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chihcheng Hsieh</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 強力驅動</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主題 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
