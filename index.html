@@ -196,9 +196,6 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <img src="https://imgur.com/A8NZfXI.png" itemprop="contentUrl">
-        </div>
           <p>我們之前原本是使用Flutter+Firebase來做Prototype的, 所以很理所當然地使用Firebase Storage來存儲使用者上傳的影片以及照片, 但Firebase Storage的上傳速度不慎理想, 所以我們打算使用Azure Blob Storage來試試看; 當我們以27.39MB的檔案做測試時, 測試的結果Azure blob storage的檔案傳輸速度約為Firebase Storage的1.94倍</p>
 <p>所以我們馬上將所有的檔案傳輸功能放到Azure上, 但同時我們也保留前端Firebase Storage的代碼, 所以當我們要改回使用Firebase Storage時, 我們就只需要更改一個前端的參數即可</p>
 <p><img src="https://imgur.com/A8NZfXI.png" alt="SpeedShowing"></p>
@@ -275,18 +272,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <img src="https://miro.medium.com/fit/c/1838/551/1*uhSX5djhrWiguXoWsW_lEw.png" itemprop="contentUrl">
-        </div>
-          <h1 id="Set-configuration"><a href="#Set-configuration" class="headerlink" title="Set configuration"></a>Set configuration</h1><p>In the Publish page ( Right click your solutoin -&gt; Publish ), change your configuration to Dubug. Then, publish your solution to Azure.</p>
-<p><img src="https://github.com/ChihchengHsieh/HexoBlog/blob/master/Images/ChangeConfigurationToDebug.png?raw=true"></p>
-<h1 id="Start-debugging"><a href="#Start-debugging" class="headerlink" title="Start debugging"></a>Start debugging</h1><ul>
-<li>Click <strong>Manage in Cloud Explorer</strong>.</li>
-<li>Click your project then the action column will show <strong>Attach Debugger</strong></li>
-<li>Click <strong>Attach Debugger</strong> Visual Studio will start to connect with the server and debug.</li>
-</ul>
-<p><img src="https://github.com/ChihchengHsieh/HexoBlog/blob/master/Images/ClickAttachDebuggerToStartDebuggingMode.png?raw=true"></p>
-
+          <p><img src="https://miro.medium.com/fit/c/1838/551/1*uhSX5djhrWiguXoWsW_lEw.png"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/08/22/2020-08-23-DebuggingAzureServer/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -352,26 +346,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <img src="https://www.interlinked.com.au/wp-content/uploads/2016/12/Microsoft-Azure-Interlinked-2.png" itemprop="contentUrl">
-        </div>
-          <h1 id="Open-the-release-setting-window"><a href="#Open-the-release-setting-window" class="headerlink" title="Open the release setting window"></a>Open the release setting window</h1><h2 id="Find-the-release-window-under-the-Build-tab"><a href="#Find-the-release-window-under-the-Build-tab" class="headerlink" title="Find the release window under the Build tab:"></a>Find the release window under the <strong>Build</strong> tab:</h2><p><img src="https://trello.com/1/cards/5f33bb853323af6567cb8bd2/attachments/5f341a07d8f8cd2d1183bb6c/previews/5f341a07d8f8cd2d1183bb7c/download?signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1OTcyNDgwMDAsImV4cCI6MTU5NzI1MzQwMCwicmVzIjoiNWYzM2JiODUzMzIzYWY2NTY3Y2I4YmQyOjVmMzQxYTA3ZDhmOGNkMmQxMTgzYmI2Yzo1ZjM0MWEwN2Q4ZjhjZDJkMTE4M2JiN2MiLCJhdWQiOiJUcmVsbG8iLCJpc3MiOiJUcmVsbG8ifQ.t_Yc-PI3wl70YyBVgWxv0BPSM06jDHHyn7HRSY9A_4c"></p>
-<h2 id="Pressing-the-start-button-to-finish-the-publishing-process"><a href="#Pressing-the-start-button-to-finish-the-publishing-process" class="headerlink" title="Pressing the start button to finish the publishing process."></a>Pressing the start button to finish the publishing process.</h2><p><img src="https://trello.com/1/cards/5f33bb853323af6567cb8bd2/attachments/5f341ab083e2162d80ff96df/previews/5f341ab183e2162d80ff96ea/download?signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1OTcyNDgwMDAsImV4cCI6MTU5NzI1MzQwMCwicmVzIjoiNWYzM2JiODUzMzIzYWY2NTY3Y2I4YmQyOjVmMzQxYWIwODNlMjE2MmQ4MGZmOTZkZjo1ZjM0MWFiMTgzZTIxNjJkODBmZjk2ZWEiLCJhdWQiOiJUcmVsbG8iLCJpc3MiOiJUcmVsbG8ifQ.kazktpZR_jCx5uYRI20XFgZjgM0Z3J7MiF95Nvv4LC4"></p>
-<p>After pressing this start button, a window will pop out. And, just follow the instruction to fill and the fields.  </p>
-<h2 id="Set-up-the-dependencies"><a href="#Set-up-the-dependencies" class="headerlink" title="Set up the dependencies"></a>Set up the dependencies</h2><p>After you complete the fields about your sever. It will point out the dependency you need. You can press <strong>Configure</strong> to set up your dependency. And you are good to go. Just press the Publish button you can publish your serve to Azure cloud.</p>
-<p><img src="https://trello.com/1/cards/5f33bb853323af6567cb8bd2/attachments/5f341be22bb9dd602e23ec6e/previews/5f341be32bb9dd602e23ec96/download?signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1OTcyNDgwMDAsImV4cCI6MTU5NzI1MzQwMCwicmVzIjoiNWYzM2JiODUzMzIzYWY2NTY3Y2I4YmQyOjVmMzQxYmUyMmJiOWRkNjAyZTIzZWM2ZTo1ZjM0MWJlMzJiYjlkZDYwMmUyM2VjOTYiLCJhdWQiOiJUcmVsbG8iLCJpc3MiOiJUcmVsbG8ifQ.o33-yzoVFGc2Xuk4Lc6xWdqRgSjAaMZanAvzpp2PyZI"></p>
-<h1 id="Bugs"><a href="#Bugs" class="headerlink" title="Bugs"></a>Bugs</h1><h2 id="HTTP-Error-500-30-ANCM-In-Process-Start-Failure"><a href="#HTTP-Error-500-30-ANCM-In-Process-Start-Failure" class="headerlink" title="HTTP Error 500.30 - ANCM In-Process Start Failure"></a>HTTP Error 500.30 - ANCM In-Process Start Failure</h2><h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>This may happen when publishing the server to Azure. This message means the server on the azure <strong>doesn’t start correctly</strong>. Therefore, any request to the server will get this message as response. To understand what’s going on on the Azure server, we have to first go to the <strong>Azure console</strong> and find the console to run the solution again here. </p>
-<p><img src="https://trello.com/1/cards/5f33bb853323af6567cb8bd2/attachments/5f3417dd6ec31158f0667f73/previews/5f3417de6ec31158f0667f8e/download?signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1OTcyNDgwMDAsImV4cCI6MTU5NzI1MzQwMCwicmVzIjoiNWYzM2JiODUzMzIzYWY2NTY3Y2I4YmQyOjVmMzQxN2RkNmVjMzExNThmMDY2N2Y3Mzo1ZjM0MTdkZTZlYzMxMTU4ZjA2NjdmOGUiLCJhdWQiOiJUcmVsbG8iLCJpc3MiOiJUcmVsbG8ifQ.6gpvEbQ8VCKrBcB-_Ot19uncgdRpRtbSCCSH93-5bSM"></p>
-<p>To run the solution again in this console, we can get the same result of the output window during debugging locally. According to the demonstrated message above, the bug is prababaly caused by the <strong>Mirgation Error</strong>. Since the data in the database is jus for the use of testing, we can directly remove all the migrations and migrate them when the app start by the following code in <code>Program.cs</code>. </p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">      &#123;</span><br><span class="line">          Console.WriteLine(<span class="string">&quot;Running Start&quot;</span>);</span><br><span class="line">          IHost host = CreateHostBuilder(args).Build();</span><br><span class="line"></span><br><span class="line">          <span class="comment">// Intialise the SQL Db before running the Host</span></span><br><span class="line">          <span class="keyword">using</span> (IServiceScope scope = host.Services.CreateScope())</span><br><span class="line">          &#123;</span><br><span class="line">              <span class="keyword">try</span></span><br><span class="line">              &#123;</span><br><span class="line">                  DivingAPIContext context = scope.ServiceProvider.GetService&lt;DivingAPIContext&gt;();</span><br><span class="line"></span><br><span class="line">                  <span class="comment">// Ensuring the Db Status</span></span><br><span class="line">                  context.Database.EnsureCreated();</span><br><span class="line">                  context.Database.Migrate();</span><br><span class="line"></span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">catch</span> (Exception ex)</span><br><span class="line">              &#123;</span><br><span class="line">                  ILogger&lt;Program&gt; logger = scope.ServiceProvider.GetRequiredService&lt;ILogger&lt;Program&gt;&gt;();</span><br><span class="line">                  logger.LogError(ex, <span class="string">&quot;An error occured while Operating the Db&quot;</span>);</span><br><span class="line">                  <span class="keyword">throw</span>;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          host.Run();</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Steps"><a href="#Steps" class="headerlink" title="Steps:"></a>Steps:</h3><ul>
-<li>Remove the migrations and database. (If you don’t want to remove the database, you can update your database to previous version and do the same tricks below).</li>
-<li>Run migration during the app start.</li>
-</ul>
-<h3 id="Another-solution-Not-working-on-my-case-but-may-help-your"><a href="#Another-solution-Not-working-on-my-case-but-may-help-your" class="headerlink" title="Another solution (Not working on my case, but may help your):"></a>Another solution (Not working on my case, but may help your):</h3><p><a target="_blank" rel="noopener" href="https://build5nines.com/fix-net-core-http-error-500-30-after-publish-to-app-service-from-visual-studio/">[Click here to see another solution]</a></p>
-
+          <p><img src="https://www.interlinked.com.au/wp-content/uploads/2016/12/Microsoft-Azure-Interlinked-2.png"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/08/22/2020-08-13-DeployDotNetToAzure/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -437,41 +420,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <img src="https://trello-attachments.s3.amazonaws.com/5f088e4f109e0a21e54dcaf6/669x1375/ddc0a771de7211a226ea3f04d142add9/media_temp%283%29.jpg" itemprop="contentUrl">
-        </div>
-          <h1 id="用到的Package"><a href="#用到的Package" class="headerlink" title="用到的Package:"></a>用到的Package:</h1><p><a target="_blank" rel="noopener" href="https://pub.dev/packages/shared_preferences">[sahred_preferences]</a></p>
-<h1 id="實作"><a href="#實作" class="headerlink" title="實作:"></a>實作:</h1><h2 id="概念介紹"><a href="#概念介紹" class="headerlink" title="概念介紹"></a>概念介紹</h2><p>使用SharedPrefrence將一個 <code>&#123;&quot;ProductItemId&quot;: Quantity&#125;</code> 的 <code>Map&lt;String,int&gt;</code> 利用 <code>json.encode()</code> 和 <code>json.decode()</code> 來存取在Local. 當需要使用的時候再取得所有的Key來Request所有的商品來顯示.</p>
-<h2 id="用到的Class"><a href="#用到的Class" class="headerlink" title="用到的Class"></a>用到的Class</h2><p><strong>Product</strong>是用來存取通用的產品資料, 例如品名和產品介紹; <strong>ProductItem</strong> 則是用來存取不同的品項, 例如Size和Color.</p>
-<ul>
-<li>Product</li>
-<li>ProductItem</li>
-</ul>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Product</span></span>&#123;</span><br><span class="line">  <span class="built_in">String</span> id;</span><br><span class="line">  <span class="built_in">String</span> name;</span><br><span class="line">  <span class="built_in">String</span> description;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Image urls for showing the product.</span></span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; imageUrls;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Variants of the product. (ex: Different colors) </span></span><br><span class="line">  <span class="built_in">List</span>&lt;ProductItem&gt; productItems;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ProductItem</span> </span>&#123;</span><br><span class="line">  <span class="built_in">String</span> id;</span><br><span class="line">  Product belongProduct;</span><br><span class="line">  <span class="built_in">String</span> itemName;</span><br><span class="line">  <span class="built_in">double</span> price;</span><br><span class="line">  <span class="built_in">int</span> totalQuantity;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// With these two class, we can create...</span></span><br><span class="line"></span><br><span class="line">Product newCloth = Product(</span><br><span class="line">    name: <span class="string">&quot;T-Shirt&quot;</span></span><br><span class="line">    description: <span class="string">&quot;Highest quality with lowest price you can get.&quot;</span></span><br><span class="line">    imageUrls: [</span><br><span class="line">        <span class="string">&quot;www.abc.com/12345.png&quot;</span>,</span><br><span class="line">        <span class="string">&quot;www.abc.com/67890.png&quot;</span></span><br><span class="line">    ],</span><br><span class="line">    productItems: [</span><br><span class="line">        ProductItem(</span><br><span class="line">            itemName: <span class="string">&quot;Yellow&quot;</span></span><br><span class="line">            price: <span class="number">14.5</span>,</span><br><span class="line">            totalQuantity: <span class="number">50</span>,</span><br><span class="line">        ),</span><br><span class="line">        ProductItem(</span><br><span class="line">            itemName: <span class="string">&quot;Black&quot;</span></span><br><span class="line">            price: <span class="number">17.9</span>,</span><br><span class="line">            totalQuantity: <span class="number">20</span>,</span><br><span class="line">        ),</span><br><span class="line">    ]</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="功能實作"><a href="#功能實作" class="headerlink" title="功能實作"></a>功能實作</h2><p>實作的功能並不複雜, 大部分只是類似經典的CRUD, 只是施作地點是在客戶端。</p>
-<h3 id="取得-Getter-和設置-Setter-購物車-使用SharedPreference"><a href="#取得-Getter-和設置-Setter-購物車-使用SharedPreference" class="headerlink" title="取得(Getter)和設置(Setter)購物車(使用SharedPreference)"></a>取得(Getter)和設置(Setter)購物車(使用SharedPreference)</h3><h4 id="設置-Set"><a href="#設置-Set" class="headerlink" title="設置(Set)"></a>設置(Set)</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="built_in">bool</span>&gt; setShoppingCartMap(</span><br><span class="line">   SharedPreferences prefs,</span><br><span class="line">   <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; shoppingCartMap,</span><br><span class="line"> ) <span class="keyword">async</span> &#123;</span><br><span class="line">   <span class="built_in">bool</span> success = <span class="keyword">await</span> prefs.setString(</span><br><span class="line">       Env.orderShoppingCartSharedPreferenceStoringString,</span><br><span class="line">       json.encode(shoppingCartMap));</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (!success)</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">throw</span> Exception(</span><br><span class="line">      <span class="string">&quot;Shopping can&#x27;t be saved&quot;</span>,</span><br><span class="line">     );</span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="取得-Get"><a href="#取得-Get" class="headerlink" title="取得(Get)"></a>取得(Get)</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; getShoppingCartMap(SharedPreferences prefs) &#123;</span><br><span class="line">  <span class="built_in">String</span> productItemsString =</span><br><span class="line">      prefs.getString(Env.orderShoppingCartSharedPreferenceStoringString) ??</span><br><span class="line">          <span class="string">&quot;&#123;&#125;&quot;</span>;</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; shoppingCartMap = <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt;.from(</span><br><span class="line">    json.decode(productItemsString),</span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">return</span> shoppingCartMap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>有這兩個最基本與購物車互動的方法後, 我們可以用這兩個基本的方法去建造CRUD.</p>
-<h3 id="將ProductItem加入購物車"><a href="#將ProductItem加入購物車" class="headerlink" title="將ProductItem加入購物車"></a>將ProductItem加入購物車</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt;&gt; addProductItemToShoppingCart(</span><br><span class="line">    ProductItem productItemToAdd,</span><br><span class="line">    <span class="built_in">int</span> quantity,</span><br><span class="line">  ) <span class="keyword">async</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> prefs = <span class="keyword">await</span> SharedPreferences.getInstance();</span><br><span class="line">    <span class="built_in">Map</span> shoppingCartMap = getShoppingCartMap(prefs);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Checking if it contian the productItem has already in the shopping cart..</span></span><br><span class="line">    <span class="built_in">bool</span> alreadyInShoppingCart =</span><br><span class="line">        shoppingCartMap.containsKey(productItemToAdd.id);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (alreadyInShoppingCart) &#123;</span><br><span class="line">      shoppingCartMap[productItemToAdd.id] += quantity;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      shoppingCartMap[productItemToAdd.id] = quantity;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Store back to prefs;</span></span><br><span class="line">    <span class="built_in">bool</span> saveSuccessfully = <span class="keyword">await</span> setShoppingCartMap(prefs, shoppingCartMap);</span><br><span class="line">    <span class="keyword">return</span> saveSuccessfully ? shoppingCartMap : <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="在購物車內修改數量-Quantity"><a href="#在購物車內修改數量-Quantity" class="headerlink" title="在購物車內修改數量(Quantity)"></a>在購物車內修改數量(Quantity)</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt;&gt; updateProductItemQuantityInShoppingCart(</span><br><span class="line">  <span class="built_in">String</span> productItemIdToRemove,</span><br><span class="line">  <span class="built_in">int</span> quantity,</span><br><span class="line">) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">final</span> prefs = <span class="keyword">await</span> SharedPreferences.getInstance();</span><br><span class="line">  <span class="built_in">Map</span> shoppingCartMap = getShoppingCartMap(prefs);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Checking if it contian the productItem already.</span></span><br><span class="line">  <span class="built_in">bool</span> inShoppingCart = shoppingCartMap.containsKey(productItemIdToRemove);</span><br><span class="line">  <span class="keyword">if</span> (!inShoppingCart)</span><br><span class="line">    <span class="comment">//  &quot;Product item is not in the shopping cart. Add product item to shopping cart first&quot;</span></span><br><span class="line">    <span class="keyword">throw</span> Exception(</span><br><span class="line">      <span class="string">&quot;Item is not in the shopping cart.&quot;</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (quantity &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    shoppingCartMap[productItemIdToRemove] = quantity;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// Removing the product item from shopping cart if given value is negative.; </span></span><br><span class="line">    shoppingCartMap.remove(productItemIdToRemove);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Store back to pref;</span></span><br><span class="line">  <span class="built_in">bool</span> saveSuccessfully = <span class="keyword">await</span> setShoppingCartMap(prefs, shoppingCartMap);</span><br><span class="line">  <span class="keyword">return</span> saveSuccessfully ? shoppingCartMap : <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="刪除單項ProductItem"><a href="#刪除單項ProductItem" class="headerlink" title="刪除單項ProductItem"></a>刪除單項ProductItem</h3><p>我們可以利用上個Function來執行這項指令</p>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt;&gt; removeProudctItemFromShoppingCart(</span><br><span class="line">  <span class="built_in">String</span> productItemIdToRemove,</span><br><span class="line">) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> updateProductItemQuantityInShoppingCart(</span><br><span class="line">      productItemIdToRemove, <span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="清空購物車"><a href="#清空購物車" class="headerlink" title="清空購物車"></a>清空購物車</h3><p>直接將Shopping cart這個Map抹除掉.</p>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="built_in">bool</span>&gt; emptyShoppingCart() <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">final</span> prefs = <span class="keyword">await</span> SharedPreferences.getInstance();</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> prefs.remove(shoppingCartSotringString);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="顯示購物車"><a href="#顯示購物車" class="headerlink" title="顯示購物車"></a>顯示購物車</h3><p>要顯示購物車 我們需要一個新的Class來存 </p>
-<ul>
-<li>ProductItem</li>
-<li>Quantity</li>
-</ul>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ShoppingCartResult</span> </span>&#123;</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; shoppingCartMap;</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, ProductItem&gt; productItemsMap;</span><br><span class="line"></span><br><span class="line">  ShoppingCartResult(&#123;</span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.shoppingCartMap,</span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.productItemsMap,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">factory</span> ShoppingCartResult.fromProductItemList(</span><br><span class="line">      <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; shoppingCartMap, <span class="built_in">List</span>&lt;ProductItem&gt; productItemList) &#123;</span><br><span class="line">    <span class="keyword">return</span> ShoppingCartResult(</span><br><span class="line">      shoppingCartMap: shoppingCartMap,</span><br><span class="line">      productItemsMap: <span class="built_in">Map</span>.fromIterable(</span><br><span class="line">        shoppingCartMap.keys.map(</span><br><span class="line">          (k) =&gt; &#123;</span><br><span class="line">            k: productItemList.firstWhere((i) =&gt; i.id == k),</span><br><span class="line">          &#125;,</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Future&lt;ShoppingCartResult&gt; getProductItemsInShoppingCart(</span><br><span class="line">  BuildContext context,</span><br><span class="line">) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">final</span> prefs = <span class="keyword">await</span> SharedPreferences.getInstance();</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; shoppingCartMap = getShoppingCartMap(prefs);</span><br><span class="line"></span><br><span class="line">  ShoppingCartResult result = ShoppingCartResult.fromProductItemList(</span><br><span class="line">    shoppingCartMap,</span><br><span class="line">    shoppingCartMap?.keys?.toList()?.isNotEmpty == <span class="keyword">true</span></span><br><span class="line">          <span class="comment">// Functions to retrieve the productItems from server.</span></span><br><span class="line">        ? <span class="keyword">await</span> context</span><br><span class="line">            .read&lt;ProductService&gt;()</span><br><span class="line">            .getProductItemsFromListOfItemIds(</span><br><span class="line">              context,</span><br><span class="line">              shoppingCartMap.keys.toList(),</span><br><span class="line">            )</span><br><span class="line">        : [],</span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>這個購物車實作非常簡單, 不用去實作太多server-side的部分, 但當使用者在不同裝置中登入的時時候換看見不同的購物車(無法存儲在雲端). 想要改進這個問題可以在後端連結MongoDB(或其他NoSQL)來當作緩存存取這些購物車的資料, 因購物車可能高頻率的被更新而且不需要使用太多的Join查找, 且大多數的時候只單純使用Key來搜尋. </p>
-
+          <p><img src="https://trello-attachments.s3.amazonaws.com/5f088e4f109e0a21e54dcaf6/669x1375/ddc0a771de7211a226ea3f04d142add9/media_temp%283%29.jpg"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/08/22/2020-07-16-AddingShoppingCart/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -537,13 +494,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <img src="https://images.ctfassets.net/fzn2n1nzq965/3AGidihOJl4nH9D1vDjM84/9540155d584be52fc54c443b6efa4ae6/homepage.png?fm=jpg" itemprop="contentUrl">
-        </div>
           <h1 id="Setting-up-the-WebHook-in-the-Stripe-console"><a href="#Setting-up-the-WebHook-in-the-Stripe-console" class="headerlink" title="Setting up the WebHook in the Stripe console."></a>Setting up the WebHook in the Stripe console.</h1><p>You have to set up your end point in the stripe console. Since we’re using the PaymentIntent for requesting the payment, we require all the activities related to the payment intent to send a notification to the webhook.</p>
-<p><img src="https://trello.com/1/cards/5f338a1c53a3ee542c3c68bd/attachments/5f33b9daad5fd74a428e5aa3/previews/5f33b9daad5fd74a428e5aaf/download?signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1OTcyMjI4MDAsImV4cCI6MTU5NzIyODIwMCwicmVzIjoiNWYzMzhhMWM1M2EzZWU1NDJjM2M2OGJkOjVmMzNiOWRhYWQ1ZmQ3NGE0MjhlNWFhMzo1ZjMzYjlkYWFkNWZkNzRhNDI4ZTVhYWYiLCJhdWQiOiJUcmVsbG8iLCJpc3MiOiJUcmVsbG8ifQ.PPzi3gB9y5acksfErJBy9IRVtcw6z8X6xzMKnSNfTC0"></p>
-<p><img src="https://trello.com/1/cards/5f338a1c53a3ee542c3c68bd/attachments/5f33ba4bc2309688fb2aa523/previews/5f33ba4cc2309688fb2aa59c/download?signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1OTcyMjI4MDAsImV4cCI6MTU5NzIyODIwMCwicmVzIjoiNWYzMzhhMWM1M2EzZWU1NDJjM2M2OGJkOjVmMzNiYTRiYzIzMDk2ODhmYjJhYTUyMzo1ZjMzYmE0Y2MyMzA5Njg4ZmIyYWE1OWMiLCJhdWQiOiJUcmVsbG8iLCJpc3MiOiJUcmVsbG8ifQ.-LkEPaVqr4Mql44xKSrMTuOk0KUxbxSS51hs03r75og"></p>
-
+<p><img src="https://trello.com/1/cards/5f338a1c53a3ee542c3c68bd/attachments/5f33b9daad5fd74a428e5aa3/previews/5f33b9daad5fd74a428e5aaf/download?signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1OTcyMjI4MDAsImV4cCI6MTU5NzIyODIwMCwicmVzIjoiNWYzMzhhMWM1M2EzZWU1NDJjM2M2OGJkOjVmMzNiOWRhYWQ1ZmQ3NGE0MjhlNWFhMzo1ZjMzYjlkYWFkNWZkNzRhNDI4ZTVhYWYiLCJhdWQiOiJUcmVsbG8iLCJpc3MiOiJUcmVsbG8ifQ.PPzi3gB9y5acksfErJBy9IRVtcw6z8X6xzMKnSNfTC0">\</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/08/22/2020-08-12-TestingStripWithAzure/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -609,13 +569,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <img src="https://stripe.com/img/v3/home/social.png" itemprop="contentUrl">
-        </div>
-          <p>The stripe implementation on .NET and flutter. Payment methods includes Native Pay and Credit Card.</p>
+          <p><img src="https://stripe.com/img/v3/home/social.png"><br>The stripe implementation on .NET and flutter. Payment methods includes Native Pay and Credit Card.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/08/22/2020-07-14-StripePayment/">
+              <a class="btn" href="/2022/08/22/2020-07-14-StripePayment/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -686,14 +643,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <img src="https://github.com/ChihchengHsieh/Applying-SAGAN-on-Super-Resolution/blob/master/SR_samplesPh.png?raw=true" itemprop="contentUrl">
-        </div>
-          <span id="more"></span>
-
-<p>[<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1609.04802.pdf">SRGAN paper</a>]<br>[<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1805.08318.pdf">SAGAN paper</a>]<br>[<a target="_blank" rel="noopener" href="https://github.com/ChihchengHsieh/Applying-SAGAN-on-Super-Resolution">Implementation</a>]</p>
-<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><p>Generated image -&gt; input image -&gt; Ground Truth<br><img src="https://github.com/ChihchengHsieh/Applying-SAGAN-on-Super-Resolution/blob/master/SR_samplesPh.png?raw=true"><br><img src="https://github.com/ChihchengHsieh/Applying-SAGAN-on-Super-Resolution/blob/master/SR_loss.png?raw=true"></p>
-
+          <p><img src="https://github.com/ChihchengHsieh/Applying-SAGAN-on-Super-Resolution/blob/master/SR_samplesPh.png?raw=true"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/07/25/2018-07-25-Applying_SAGAN_on_SuperResolution/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -759,22 +717,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <img src="https://github.com/ChihchengHsieh/Glow/blob/master/img/GlowStPh.png?raw=true" itemprop="contentUrl">
-        </div>
-          <span id="more"></span>
-
-
-
-<p>[<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1410.8516.pdf">NICE: NON-LINEAR INDEPENDENT COMPONENTS ESTIMATION</a>]</p>
-<p>[<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1807.03039.pdf">Glow: Generative Flow with Invertible 1×1 Convolutions</a>]</p>
-<p>[<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1605.08803.pdf">DENSITY ESTIMATION USING REAL NVP</a>]</p>
-<p>[<a target="_blank" rel="noopener" href="https://blog.openai.com/glow/">OpenAI Blog</a>]</p>
-<p>[<a target="_blank" rel="noopener" href="https://github.com/chaiyujin/glow-pytorch">Code from</a>]</p>
-<p>[<a target="_blank" rel="noopener" href="https://github.com/ChihchengHsieh/Glow">Implementation</a>]</p>
-<h2 id="Papers"><a href="#Papers" class="headerlink" title="Papers"></a>Papers</h2><p><img src="https://github.com/ChihchengHsieh/Glow/blob/master/img/PapersPh.png?raw=true"></p>
-<h2 id="Training-results"><a href="#Training-results" class="headerlink" title="Training_results"></a>Training_results</h2><p><img src="https://github.com/ChihchengHsieh/Glow/blob/master/img/TrainingHist.png?raw=true"></p>
-
+          <p><img src="https://github.com/ChihchengHsieh/Glow/blob/master/img/GlowStPh.png?raw=true"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/07/25/2018-07-25-Glow/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -840,17 +791,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <img src="https://github.com/ChihchengHsieh/SAGAN/blob/master/SAGAN/Screen%20Shot%202018-07-07%20at%207.29.11%20pm.png?raw=true" itemprop="contentUrl">
-        </div>
-          <span id="more"></span>
-
-
-<p>[<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1805.08318.pdf">SAGAN Paper</a>][<a target="_blank" rel="noopener" href="https://github.com/ChihchengHsieh/SAGAN">Implementation</a>]</p>
-<h1 id="SAGAN"><a href="#SAGAN" class="headerlink" title="SAGAN"></a>SAGAN</h1><p><img src="https://github.com/ChihchengHsieh/SAGAN/blob/master/SAGAN/Screen%20Shot%202018-07-07%20at%207.06.44%20pm.png?raw=true"></p>
-<h1 id="Applying-on-the-BEGAN"><a href="#Applying-on-the-BEGAN" class="headerlink" title="Applying on the BEGAN"></a>Applying on the BEGAN</h1><p><img src="https://github.com/ChihchengHsieh/SAGAN/blob/master/SABEGAN/Screen%20Shot%202018-07-07%20at%206.44.47%20pm.png?raw=true"></p>
-<p><img src="https://github.com/ChihchengHsieh/SAGAN/blob/master/SABEGAN/Screen%20Shot%202018-07-07%20at%206.57.38%20pm.png?raw=true"></p>
-
+          <p><img src="https://github.com/ChihchengHsieh/SAGAN/blob/master/SAGAN/Screen%20Shot%202018-07-07%20at%207.29.11%20pm.png?raw=true"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/07/07/2018-07-07-SAGAN/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -869,7 +818,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2018/07/05/2018-07-05-ACGAN/">
+    <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2018/07/05/2018-07-05-BEGAN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://avatars.githubusercontent.com/u/37566901">
@@ -883,7 +832,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2018/07/05/2018-07-05-ACGAN/" class="post-title-link" itemprop="url">ACGAN</a>
+            <a href="/2018/07/05/2018-07-05-BEGAN/" class="post-title-link" itemprop="url">BEGAN</a>
         </h2>
 
         <div class="post-meta">
@@ -916,14 +865,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <img src="https://github.com/ChihchengHsieh/BE-ACGAN/blob/master/ACGAN/ACStructure.png?raw=true" itemprop="contentUrl">
-        </div>
-          <span id="more"></span>
-
-<p>[<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1610.09585.pdf">ACGAN Paper</a>][<a target="_blank" rel="noopener" href="https://github.com/ChihchengHsieh/BE-ACGAN">Implementation</a>]</p>
-<h1 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h1><p><img src="https://github.com/ChihchengHsieh/BE-ACGAN/blob/master/ACGAN/Results.png?raw=true"></p>
-
+          <p><img src="https://github.com/ChihchengHsieh/BE-ACGAN/blob/master/BEGAN/BEGANStructure.png?raw=true"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/07/05/2018-07-05-BEGAN/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1020,7 +970,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

@@ -203,9 +203,6 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <img src="https://imgur.com/A8NZfXI.png" itemprop="contentUrl">
-        </div>
         <p>我們之前原本是使用Flutter+Firebase來做Prototype的, 所以很理所當然地使用Firebase Storage來存儲使用者上傳的影片以及照片, 但Firebase Storage的上傳速度不慎理想, 所以我們打算使用Azure Blob Storage來試試看; 當我們以27.39MB的檔案做測試時, 測試的結果Azure blob storage的檔案傳輸速度約為Firebase Storage的1.94倍</p>
 <p>所以我們馬上將所有的檔案傳輸功能放到Azure上, 但同時我們也保留前端Firebase Storage的代碼, 所以當我們要改回使用Firebase Storage時, 我們就只需要更改一個前端的參數即可</p>
 <p><img src="https://imgur.com/A8NZfXI.png" alt="SpeedShowing"></p>
@@ -338,7 +335,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

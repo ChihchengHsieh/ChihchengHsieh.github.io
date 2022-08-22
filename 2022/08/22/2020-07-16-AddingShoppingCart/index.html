@@ -19,12 +19,10 @@
     var CONFIG = {"hostname":"chihchenghsieh.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="用到的Package:[sahred_preferences] 實作:概念介紹使用SharedPrefrence將一個 &amp;#123;&quot;ProductItemId&quot;: Quantity&amp;#125; 的 Map&lt;String,int&gt; 利用 json.encode() 和 json.decode() 來存取在Local. 當需要使用的時候再取得所有的Key來Reques">
-<meta property="og:type" content="article">
+  <meta property="og:type" content="article">
 <meta property="og:title" content="在 Flutter 中加入購物車的功能">
 <meta property="og:url" content="https://chihchenghsieh.github.io/2022/08/22/2020-07-16-AddingShoppingCart/index.html">
 <meta property="og:site_name" content="Chicheng&#39;s Blog">
-<meta property="og:description" content="用到的Package:[sahred_preferences] 實作:概念介紹使用SharedPrefrence將一個 &amp;#123;&quot;ProductItemId&quot;: Quantity&amp;#125; 的 Map&lt;String,int&gt; 利用 json.encode() 和 json.decode() 來存取在Local. 當需要使用的時候再取得所有的Key來Reques">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://trello-attachments.s3.amazonaws.com/5f088e4f109e0a21e54dcaf6/669x1375/ddc0a771de7211a226ea3f04d142add9/media_temp%283%29.jpg">
 <meta property="article:published_time" content="2022-08-21T23:23:25.432Z">
@@ -201,10 +199,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <img src="https://trello-attachments.s3.amazonaws.com/5f088e4f109e0a21e54dcaf6/669x1375/ddc0a771de7211a226ea3f04d142add9/media_temp%283%29.jpg" itemprop="contentUrl">
-        </div>
-        <h1 id="用到的Package"><a href="#用到的Package" class="headerlink" title="用到的Package:"></a>用到的Package:</h1><p><a target="_blank" rel="noopener" href="https://pub.dev/packages/shared_preferences">[sahred_preferences]</a></p>
+        <p><img src="https://trello-attachments.s3.amazonaws.com/5f088e4f109e0a21e54dcaf6/669x1375/ddc0a771de7211a226ea3f04d142add9/media_temp%283%29.jpg"></p>
+<span id="more"></span>
+
+
+<h1 id="用到的Package"><a href="#用到的Package" class="headerlink" title="用到的Package:"></a>用到的Package:</h1><p><a target="_blank" rel="noopener" href="https://pub.dev/packages/shared_preferences">[sahred_preferences]</a></p>
 <h1 id="實作"><a href="#實作" class="headerlink" title="實作:"></a>實作:</h1><h2 id="概念介紹"><a href="#概念介紹" class="headerlink" title="概念介紹"></a>概念介紹</h2><p>使用SharedPrefrence將一個 <code>&#123;&quot;ProductItemId&quot;: Quantity&#125;</code> 的 <code>Map&lt;String,int&gt;</code> 利用 <code>json.encode()</code> 和 <code>json.decode()</code> 來存取在Local. 當需要使用的時候再取得所有的Key來Request所有的商品來顯示.</p>
 <h2 id="用到的Class"><a href="#用到的Class" class="headerlink" title="用到的Class"></a>用到的Class</h2><p><strong>Product</strong>是用來存取通用的產品資料, 例如品名和產品介紹; <strong>ProductItem</strong> 則是用來存取不同的品項, 例如Size和Color.</p>
 <ul>
@@ -346,7 +345,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

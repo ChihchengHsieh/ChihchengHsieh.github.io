@@ -19,14 +19,16 @@
     var CONFIG = {"hostname":"chihchenghsieh.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Open the release setting windowFind the release window under the Build tab: Pressing the start button to finish the publishing process. After pressing this start button, a window will pop out. And, ju">
-<meta property="og:type" content="article">
+  <meta property="og:type" content="article">
 <meta property="og:title" content="Deploy .NET core to Azue">
 <meta property="og:url" content="https://chihchenghsieh.github.io/2022/08/22/2020-08-13-DeployDotNetToAzure/index.html">
 <meta property="og:site_name" content="Chicheng&#39;s Blog">
-<meta property="og:description" content="Open the release setting windowFind the release window under the Build tab: Pressing the start button to finish the publishing process. After pressing this start button, a window will pop out. And, ju">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://www.interlinked.com.au/wp-content/uploads/2016/12/Microsoft-Azure-Interlinked-2.png">
+<meta property="og:image" content="https://trello.com/1/cards/5f33bb853323af6567cb8bd2/attachments/5f341a07d8f8cd2d1183bb6c/previews/5f341a07d8f8cd2d1183bb7c/download?signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1OTcyNDgwMDAsImV4cCI6MTU5NzI1MzQwMCwicmVzIjoiNWYzM2JiODUzMzIzYWY2NTY3Y2I4YmQyOjVmMzQxYTA3ZDhmOGNkMmQxMTgzYmI2Yzo1ZjM0MWEwN2Q4ZjhjZDJkMTE4M2JiN2MiLCJhdWQiOiJUcmVsbG8iLCJpc3MiOiJUcmVsbG8ifQ.t_Yc-PI3wl70YyBVgWxv0BPSM06jDHHyn7HRSY9A_4c">
+<meta property="og:image" content="https://trello.com/1/cards/5f33bb853323af6567cb8bd2/attachments/5f341ab083e2162d80ff96df/previews/5f341ab183e2162d80ff96ea/download?signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1OTcyNDgwMDAsImV4cCI6MTU5NzI1MzQwMCwicmVzIjoiNWYzM2JiODUzMzIzYWY2NTY3Y2I4YmQyOjVmMzQxYWIwODNlMjE2MmQ4MGZmOTZkZjo1ZjM0MWFiMTgzZTIxNjJkODBmZjk2ZWEiLCJhdWQiOiJUcmVsbG8iLCJpc3MiOiJUcmVsbG8ifQ.kazktpZR_jCx5uYRI20XFgZjgM0Z3J7MiF95Nvv4LC4">
+<meta property="og:image" content="https://trello.com/1/cards/5f33bb853323af6567cb8bd2/attachments/5f341be22bb9dd602e23ec6e/previews/5f341be32bb9dd602e23ec96/download?signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1OTcyNDgwMDAsImV4cCI6MTU5NzI1MzQwMCwicmVzIjoiNWYzM2JiODUzMzIzYWY2NTY3Y2I4YmQyOjVmMzQxYmUyMmJiOWRkNjAyZTIzZWM2ZTo1ZjM0MWJlMzJiYjlkZDYwMmUyM2VjOTYiLCJhdWQiOiJUcmVsbG8iLCJpc3MiOiJUcmVsbG8ifQ.o33-yzoVFGc2Xuk4Lc6xWdqRgSjAaMZanAvzpp2PyZI">
+<meta property="og:image" content="https://trello.com/1/cards/5f33bb853323af6567cb8bd2/attachments/5f3417dd6ec31158f0667f73/previews/5f3417de6ec31158f0667f8e/download?signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1OTcyNDgwMDAsImV4cCI6MTU5NzI1MzQwMCwicmVzIjoiNWYzM2JiODUzMzIzYWY2NTY3Y2I4YmQyOjVmMzQxN2RkNmVjMzExNThmMDY2N2Y3Mzo1ZjM0MTdkZTZlYzMxMTU4ZjA2NjdmOGUiLCJhdWQiOiJUcmVsbG8iLCJpc3MiOiJUcmVsbG8ifQ.6gpvEbQ8VCKrBcB-_Ot19uncgdRpRtbSCCSH93-5bSM">
 <meta property="article:published_time" content="2022-08-21T23:23:25.433Z">
 <meta property="article:modified_time" content="2022-08-21T23:23:25.433Z">
 <meta property="article:author" content="Chihcheng Hsieh">
@@ -200,10 +202,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <img src="https://www.interlinked.com.au/wp-content/uploads/2016/12/Microsoft-Azure-Interlinked-2.png" itemprop="contentUrl">
-        </div>
-        <h1 id="Open-the-release-setting-window"><a href="#Open-the-release-setting-window" class="headerlink" title="Open the release setting window"></a>Open the release setting window</h1><h2 id="Find-the-release-window-under-the-Build-tab"><a href="#Find-the-release-window-under-the-Build-tab" class="headerlink" title="Find the release window under the Build tab:"></a>Find the release window under the <strong>Build</strong> tab:</h2><p><img src="https://trello.com/1/cards/5f33bb853323af6567cb8bd2/attachments/5f341a07d8f8cd2d1183bb6c/previews/5f341a07d8f8cd2d1183bb7c/download?signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1OTcyNDgwMDAsImV4cCI6MTU5NzI1MzQwMCwicmVzIjoiNWYzM2JiODUzMzIzYWY2NTY3Y2I4YmQyOjVmMzQxYTA3ZDhmOGNkMmQxMTgzYmI2Yzo1ZjM0MWEwN2Q4ZjhjZDJkMTE4M2JiN2MiLCJhdWQiOiJUcmVsbG8iLCJpc3MiOiJUcmVsbG8ifQ.t_Yc-PI3wl70YyBVgWxv0BPSM06jDHHyn7HRSY9A_4c"></p>
+        <p><img src="https://www.interlinked.com.au/wp-content/uploads/2016/12/Microsoft-Azure-Interlinked-2.png"></p>
+<span id="more"></span>
+<h1 id="Open-the-release-setting-window"><a href="#Open-the-release-setting-window" class="headerlink" title="Open the release setting window"></a>Open the release setting window</h1><h2 id="Find-the-release-window-under-the-Build-tab"><a href="#Find-the-release-window-under-the-Build-tab" class="headerlink" title="Find the release window under the Build tab:"></a>Find the release window under the <strong>Build</strong> tab:</h2><p><img src="https://trello.com/1/cards/5f33bb853323af6567cb8bd2/attachments/5f341a07d8f8cd2d1183bb6c/previews/5f341a07d8f8cd2d1183bb7c/download?signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1OTcyNDgwMDAsImV4cCI6MTU5NzI1MzQwMCwicmVzIjoiNWYzM2JiODUzMzIzYWY2NTY3Y2I4YmQyOjVmMzQxYTA3ZDhmOGNkMmQxMTgzYmI2Yzo1ZjM0MWEwN2Q4ZjhjZDJkMTE4M2JiN2MiLCJhdWQiOiJUcmVsbG8iLCJpc3MiOiJUcmVsbG8ifQ.t_Yc-PI3wl70YyBVgWxv0BPSM06jDHHyn7HRSY9A_4c"></p>
 <h2 id="Pressing-the-start-button-to-finish-the-publishing-process"><a href="#Pressing-the-start-button-to-finish-the-publishing-process" class="headerlink" title="Pressing the start button to finish the publishing process."></a>Pressing the start button to finish the publishing process.</h2><p><img src="https://trello.com/1/cards/5f33bb853323af6567cb8bd2/attachments/5f341ab083e2162d80ff96df/previews/5f341ab183e2162d80ff96ea/download?signature=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE1OTcyNDgwMDAsImV4cCI6MTU5NzI1MzQwMCwicmVzIjoiNWYzM2JiODUzMzIzYWY2NTY3Y2I4YmQyOjVmMzQxYWIwODNlMjE2MmQ4MGZmOTZkZjo1ZjM0MWFiMTgzZTIxNjJkODBmZjk2ZWEiLCJhdWQiOiJUcmVsbG8iLCJpc3MiOiJUcmVsbG8ifQ.kazktpZR_jCx5uYRI20XFgZjgM0Z3J7MiF95Nvv4LC4"></p>
 <p>After pressing this start button, a window will pop out. And, just follow the instruction to fill and the fields.  </p>
 <h2 id="Set-up-the-dependencies"><a href="#Set-up-the-dependencies" class="headerlink" title="Set up the dependencies"></a>Set up the dependencies</h2><p>After you complete the fields about your sever. It will point out the dependency you need. You can press <strong>Configure</strong> to set up your dependency. And you are good to go. Just press the Publish button you can publish your serve to Azure cloud.</p>
@@ -329,7 +330,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
