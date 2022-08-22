@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chihchenghsieh.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="用到的Package:[sahred_preferences] 實作:概念介紹使用SharedPrefrence將一個 &amp;#123;&quot;ProductItemId&quot;: Quantity&amp;#125; 的 Map&lt;String,int&gt; 利用 json.encode() 和 json.decode() 來存取在Local. 當需要使用的時候再取得所有的Key來Reques">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在 Flutter 中加入購物車的功能">
+<meta property="og:url" content="https://chihchenghsieh.github.io/2022/08/22/2020-07-16-AddingShoppingCart/index.html">
+<meta property="og:site_name" content="Chicheng&#39;s Blog">
+<meta property="og:description" content="用到的Package:[sahred_preferences] 實作:概念介紹使用SharedPrefrence將一個 &amp;#123;&quot;ProductItemId&quot;: Quantity&amp;#125; 的 Map&lt;String,int&gt; 利用 json.encode() 和 json.decode() 來存取在Local. 當需要使用的時候再取得所有的Key來Reques">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://trello-attachments.s3.amazonaws.com/5f088e4f109e0a21e54dcaf6/669x1375/ddc0a771de7211a226ea3f04d142add9/media_temp%283%29.jpg">
+<meta property="article:published_time" content="2022-08-21T23:23:25.432Z">
+<meta property="article:modified_time" content="2022-08-21T23:23:25.432Z">
+<meta property="article:author" content="Chihcheng Hsieh">
+<meta property="article:tag" content="Flutter">
+<meta property="article:tag" content=".NET">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://trello-attachments.s3.amazonaws.com/5f088e4f109e0a21e54dcaf6/669x1375/ddc0a771de7211a226ea3f04d142add9/media_temp%283%29.jpg">
+
+<link rel="canonical" href="https://chihchenghsieh.github.io/2022/08/22/2020-07-16-AddingShoppingCart/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>在 Flutter 中加入購物車的功能 | Chicheng's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Chicheng's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Floating on PhD</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2022/08/22/2020-07-16-AddingShoppingCart/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/37566901">
+      <meta itemprop="name" content="Chihcheng Hsieh">
+      <meta itemprop="description" content="A site for recording my personal projects and readings.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chicheng's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          在 Flutter 中加入購物車的功能
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-08-22 09:23:25" itemprop="dateCreated datePublished" datetime="2022-08-22T09:23:25+10:00">2022-08-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/App-Development/" itemprop="url" rel="index"><span itemprop="name">App Development</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+            <img src="https://trello-attachments.s3.amazonaws.com/5f088e4f109e0a21e54dcaf6/669x1375/ddc0a771de7211a226ea3f04d142add9/media_temp%283%29.jpg" itemprop="contentUrl">
+        </div>
+        <h1 id="用到的Package"><a href="#用到的Package" class="headerlink" title="用到的Package:"></a>用到的Package:</h1><p><a target="_blank" rel="noopener" href="https://pub.dev/packages/shared_preferences">[sahred_preferences]</a></p>
+<h1 id="實作"><a href="#實作" class="headerlink" title="實作:"></a>實作:</h1><h2 id="概念介紹"><a href="#概念介紹" class="headerlink" title="概念介紹"></a>概念介紹</h2><p>使用SharedPrefrence將一個 <code>&#123;&quot;ProductItemId&quot;: Quantity&#125;</code> 的 <code>Map&lt;String,int&gt;</code> 利用 <code>json.encode()</code> 和 <code>json.decode()</code> 來存取在Local. 當需要使用的時候再取得所有的Key來Request所有的商品來顯示.</p>
+<h2 id="用到的Class"><a href="#用到的Class" class="headerlink" title="用到的Class"></a>用到的Class</h2><p><strong>Product</strong>是用來存取通用的產品資料, 例如品名和產品介紹; <strong>ProductItem</strong> 則是用來存取不同的品項, 例如Size和Color.</p>
+<ul>
+<li>Product</li>
+<li>ProductItem</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Product</span></span>&#123;</span><br><span class="line">  <span class="built_in">String</span> id;</span><br><span class="line">  <span class="built_in">String</span> name;</span><br><span class="line">  <span class="built_in">String</span> description;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Image urls for showing the product.</span></span><br><span class="line">  <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; imageUrls;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Variants of the product. (ex: Different colors) </span></span><br><span class="line">  <span class="built_in">List</span>&lt;ProductItem&gt; productItems;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ProductItem</span> </span>&#123;</span><br><span class="line">  <span class="built_in">String</span> id;</span><br><span class="line">  Product belongProduct;</span><br><span class="line">  <span class="built_in">String</span> itemName;</span><br><span class="line">  <span class="built_in">double</span> price;</span><br><span class="line">  <span class="built_in">int</span> totalQuantity;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// With these two class, we can create...</span></span><br><span class="line"></span><br><span class="line">Product newCloth = Product(</span><br><span class="line">    name: <span class="string">&quot;T-Shirt&quot;</span></span><br><span class="line">    description: <span class="string">&quot;Highest quality with lowest price you can get.&quot;</span></span><br><span class="line">    imageUrls: [</span><br><span class="line">        <span class="string">&quot;www.abc.com/12345.png&quot;</span>,</span><br><span class="line">        <span class="string">&quot;www.abc.com/67890.png&quot;</span></span><br><span class="line">    ],</span><br><span class="line">    productItems: [</span><br><span class="line">        ProductItem(</span><br><span class="line">            itemName: <span class="string">&quot;Yellow&quot;</span></span><br><span class="line">            price: <span class="number">14.5</span>,</span><br><span class="line">            totalQuantity: <span class="number">50</span>,</span><br><span class="line">        ),</span><br><span class="line">        ProductItem(</span><br><span class="line">            itemName: <span class="string">&quot;Black&quot;</span></span><br><span class="line">            price: <span class="number">17.9</span>,</span><br><span class="line">            totalQuantity: <span class="number">20</span>,</span><br><span class="line">        ),</span><br><span class="line">    ]</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="功能實作"><a href="#功能實作" class="headerlink" title="功能實作"></a>功能實作</h2><p>實作的功能並不複雜, 大部分只是類似經典的CRUD, 只是施作地點是在客戶端。</p>
+<h3 id="取得-Getter-和設置-Setter-購物車-使用SharedPreference"><a href="#取得-Getter-和設置-Setter-購物車-使用SharedPreference" class="headerlink" title="取得(Getter)和設置(Setter)購物車(使用SharedPreference)"></a>取得(Getter)和設置(Setter)購物車(使用SharedPreference)</h3><h4 id="設置-Set"><a href="#設置-Set" class="headerlink" title="設置(Set)"></a>設置(Set)</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="built_in">bool</span>&gt; setShoppingCartMap(</span><br><span class="line">   SharedPreferences prefs,</span><br><span class="line">   <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; shoppingCartMap,</span><br><span class="line"> ) <span class="keyword">async</span> &#123;</span><br><span class="line">   <span class="built_in">bool</span> success = <span class="keyword">await</span> prefs.setString(</span><br><span class="line">       Env.orderShoppingCartSharedPreferenceStoringString,</span><br><span class="line">       json.encode(shoppingCartMap));</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (!success)</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">throw</span> Exception(</span><br><span class="line">      <span class="string">&quot;Shopping can&#x27;t be saved&quot;</span>,</span><br><span class="line">     );</span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="取得-Get"><a href="#取得-Get" class="headerlink" title="取得(Get)"></a>取得(Get)</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; getShoppingCartMap(SharedPreferences prefs) &#123;</span><br><span class="line">  <span class="built_in">String</span> productItemsString =</span><br><span class="line">      prefs.getString(Env.orderShoppingCartSharedPreferenceStoringString) ??</span><br><span class="line">          <span class="string">&quot;&#123;&#125;&quot;</span>;</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; shoppingCartMap = <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt;.from(</span><br><span class="line">    json.decode(productItemsString),</span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">return</span> shoppingCartMap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有這兩個最基本與購物車互動的方法後, 我們可以用這兩個基本的方法去建造CRUD.</p>
+<h3 id="將ProductItem加入購物車"><a href="#將ProductItem加入購物車" class="headerlink" title="將ProductItem加入購物車"></a>將ProductItem加入購物車</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt;&gt; addProductItemToShoppingCart(</span><br><span class="line">    ProductItem productItemToAdd,</span><br><span class="line">    <span class="built_in">int</span> quantity,</span><br><span class="line">  ) <span class="keyword">async</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> prefs = <span class="keyword">await</span> SharedPreferences.getInstance();</span><br><span class="line">    <span class="built_in">Map</span> shoppingCartMap = getShoppingCartMap(prefs);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Checking if it contian the productItem has already in the shopping cart..</span></span><br><span class="line">    <span class="built_in">bool</span> alreadyInShoppingCart =</span><br><span class="line">        shoppingCartMap.containsKey(productItemToAdd.id);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (alreadyInShoppingCart) &#123;</span><br><span class="line">      shoppingCartMap[productItemToAdd.id] += quantity;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      shoppingCartMap[productItemToAdd.id] = quantity;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Store back to prefs;</span></span><br><span class="line">    <span class="built_in">bool</span> saveSuccessfully = <span class="keyword">await</span> setShoppingCartMap(prefs, shoppingCartMap);</span><br><span class="line">    <span class="keyword">return</span> saveSuccessfully ? shoppingCartMap : <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="在購物車內修改數量-Quantity"><a href="#在購物車內修改數量-Quantity" class="headerlink" title="在購物車內修改數量(Quantity)"></a>在購物車內修改數量(Quantity)</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt;&gt; updateProductItemQuantityInShoppingCart(</span><br><span class="line">  <span class="built_in">String</span> productItemIdToRemove,</span><br><span class="line">  <span class="built_in">int</span> quantity,</span><br><span class="line">) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">final</span> prefs = <span class="keyword">await</span> SharedPreferences.getInstance();</span><br><span class="line">  <span class="built_in">Map</span> shoppingCartMap = getShoppingCartMap(prefs);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Checking if it contian the productItem already.</span></span><br><span class="line">  <span class="built_in">bool</span> inShoppingCart = shoppingCartMap.containsKey(productItemIdToRemove);</span><br><span class="line">  <span class="keyword">if</span> (!inShoppingCart)</span><br><span class="line">    <span class="comment">//  &quot;Product item is not in the shopping cart. Add product item to shopping cart first&quot;</span></span><br><span class="line">    <span class="keyword">throw</span> Exception(</span><br><span class="line">      <span class="string">&quot;Item is not in the shopping cart.&quot;</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (quantity &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    shoppingCartMap[productItemIdToRemove] = quantity;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// Removing the product item from shopping cart if given value is negative.; </span></span><br><span class="line">    shoppingCartMap.remove(productItemIdToRemove);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Store back to pref;</span></span><br><span class="line">  <span class="built_in">bool</span> saveSuccessfully = <span class="keyword">await</span> setShoppingCartMap(prefs, shoppingCartMap);</span><br><span class="line">  <span class="keyword">return</span> saveSuccessfully ? shoppingCartMap : <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="刪除單項ProductItem"><a href="#刪除單項ProductItem" class="headerlink" title="刪除單項ProductItem"></a>刪除單項ProductItem</h3><p>我們可以利用上個Function來執行這項指令</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt;&gt; removeProudctItemFromShoppingCart(</span><br><span class="line">  <span class="built_in">String</span> productItemIdToRemove,</span><br><span class="line">) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> updateProductItemQuantityInShoppingCart(</span><br><span class="line">      productItemIdToRemove, <span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="清空購物車"><a href="#清空購物車" class="headerlink" title="清空購物車"></a>清空購物車</h3><p>直接將Shopping cart這個Map抹除掉.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="built_in">bool</span>&gt; emptyShoppingCart() <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">final</span> prefs = <span class="keyword">await</span> SharedPreferences.getInstance();</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> prefs.remove(shoppingCartSotringString);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="顯示購物車"><a href="#顯示購物車" class="headerlink" title="顯示購物車"></a>顯示購物車</h3><p>要顯示購物車 我們需要一個新的Class來存 </p>
+<ul>
+<li>ProductItem</li>
+<li>Quantity</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ShoppingCartResult</span> </span>&#123;</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; shoppingCartMap;</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, ProductItem&gt; productItemsMap;</span><br><span class="line"></span><br><span class="line">  ShoppingCartResult(&#123;</span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.shoppingCartMap,</span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.productItemsMap,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">factory</span> ShoppingCartResult.fromProductItemList(</span><br><span class="line">      <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; shoppingCartMap, <span class="built_in">List</span>&lt;ProductItem&gt; productItemList) &#123;</span><br><span class="line">    <span class="keyword">return</span> ShoppingCartResult(</span><br><span class="line">      shoppingCartMap: shoppingCartMap,</span><br><span class="line">      productItemsMap: <span class="built_in">Map</span>.fromIterable(</span><br><span class="line">        shoppingCartMap.keys.map(</span><br><span class="line">          (k) =&gt; &#123;</span><br><span class="line">            k: productItemList.firstWhere((i) =&gt; i.id == k),</span><br><span class="line">          &#125;,</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Future&lt;ShoppingCartResult&gt; getProductItemsInShoppingCart(</span><br><span class="line">  BuildContext context,</span><br><span class="line">) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">final</span> prefs = <span class="keyword">await</span> SharedPreferences.getInstance();</span><br><span class="line">  <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">int</span>&gt; shoppingCartMap = getShoppingCartMap(prefs);</span><br><span class="line"></span><br><span class="line">  ShoppingCartResult result = ShoppingCartResult.fromProductItemList(</span><br><span class="line">    shoppingCartMap,</span><br><span class="line">    shoppingCartMap?.keys?.toList()?.isNotEmpty == <span class="keyword">true</span></span><br><span class="line">          <span class="comment">// Functions to retrieve the productItems from server.</span></span><br><span class="line">        ? <span class="keyword">await</span> context</span><br><span class="line">            .read&lt;ProductService&gt;()</span><br><span class="line">            .getProductItemsFromListOfItemIds(</span><br><span class="line">              context,</span><br><span class="line">              shoppingCartMap.keys.toList(),</span><br><span class="line">            )</span><br><span class="line">        : [],</span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h1><p>這個購物車實作非常簡單, 不用去實作太多server-side的部分, 但當使用者在不同裝置中登入的時時候換看見不同的購物車(無法存儲在雲端). 想要改進這個問題可以在後端連結MongoDB(或其他NoSQL)來當作緩存存取這些購物車的資料, 因購物車可能高頻率的被更新而且不需要使用太多的Join查找, 且大多數的時候只單純使用Key來搜尋. </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Flutter/" rel="tag"># Flutter</a>
+              <a href="/tags/NET/" rel="tag"># .NET</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/08/22/2020-08-12-TestingStripWithAzure/" rel="prev" title="Testing the stripe with Azure server side.">
+      <i class="fa fa-chevron-left"></i> Testing the stripe with Azure server side.
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/08/22/2020-08-13-DeployDotNetToAzure/" rel="next" title="Deploy .NET core to Azue">
+      Deploy .NET core to Azue <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8%E5%88%B0%E7%9A%84Package"><span class="nav-number">1.</span> <span class="nav-text">用到的Package:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%A6%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">實作:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%B4%B9"><span class="nav-number">2.1.</span> <span class="nav-text">概念介紹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E5%88%B0%E7%9A%84Class"><span class="nav-number">2.2.</span> <span class="nav-text">用到的Class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E5%AF%A6%E4%BD%9C"><span class="nav-number">2.3.</span> <span class="nav-text">功能實作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%96%E5%BE%97-Getter-%E5%92%8C%E8%A8%AD%E7%BD%AE-Setter-%E8%B3%BC%E7%89%A9%E8%BB%8A-%E4%BD%BF%E7%94%A8SharedPreference"><span class="nav-number">2.3.1.</span> <span class="nav-text">取得(Getter)和設置(Setter)購物車(使用SharedPreference)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A8%AD%E7%BD%AE-Set"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">設置(Set)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%96%E5%BE%97-Get"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">取得(Get)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%87ProductItem%E5%8A%A0%E5%85%A5%E8%B3%BC%E7%89%A9%E8%BB%8A"><span class="nav-number">2.3.2.</span> <span class="nav-text">將ProductItem加入購物車</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E8%B3%BC%E7%89%A9%E8%BB%8A%E5%85%A7%E4%BF%AE%E6%94%B9%E6%95%B8%E9%87%8F-Quantity"><span class="nav-number">2.3.3.</span> <span class="nav-text">在購物車內修改數量(Quantity)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%AA%E9%99%A4%E5%96%AE%E9%A0%85ProductItem"><span class="nav-number">2.3.4.</span> <span class="nav-text">刪除單項ProductItem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%85%E7%A9%BA%E8%B3%BC%E7%89%A9%E8%BB%8A"><span class="nav-number">2.3.5.</span> <span class="nav-text">清空購物車</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%AF%E7%A4%BA%E8%B3%BC%E7%89%A9%E8%BB%8A"><span class="nav-number">2.3.6.</span> <span class="nav-text">顯示購物車</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number">3.</span> <span class="nav-text">結語</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Chihcheng Hsieh"
+      src="https://avatars.githubusercontent.com/u/37566901">
+  <p class="site-author-name" itemprop="name">Chihcheng Hsieh</p>
+  <div class="site-description" itemprop="description">A site for recording my personal projects and readings.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ChihchengHsieh" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ChihchengHsieh" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chihcheng Hsieh</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

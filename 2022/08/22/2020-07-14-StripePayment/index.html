@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chihchenghsieh.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="The stripe implementation on .NET and flutter. Payment methods includes Native Pay and Credit Card.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Stripe Payment for .NET and Flutter">
+<meta property="og:url" content="https://chihchenghsieh.github.io/2022/08/22/2020-07-14-StripePayment/index.html">
+<meta property="og:site_name" content="Chicheng&#39;s Blog">
+<meta property="og:description" content="The stripe implementation on .NET and flutter. Payment methods includes Native Pay and Credit Card.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://stripe.com/img/v3/home/social.png">
+<meta property="article:published_time" content="2022-08-21T23:23:25.431Z">
+<meta property="article:modified_time" content="2022-08-21T23:23:25.431Z">
+<meta property="article:author" content="Chihcheng Hsieh">
+<meta property="article:tag" content="Flutter">
+<meta property="article:tag" content=".NET">
+<meta property="article:tag" content="Stripe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://stripe.com/img/v3/home/social.png">
+
+<link rel="canonical" href="https://chihchenghsieh.github.io/2022/08/22/2020-07-14-StripePayment/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Stripe Payment for .NET and Flutter | Chicheng's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Chicheng's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Floating on PhD</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2022/08/22/2020-07-14-StripePayment/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/37566901">
+      <meta itemprop="name" content="Chihcheng Hsieh">
+      <meta itemprop="description" content="A site for recording my personal projects and readings.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chicheng's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Stripe Payment for .NET and Flutter
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-08-22 09:23:25" itemprop="dateCreated datePublished" datetime="2022-08-22T09:23:25+10:00">2022-08-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/App-Development/" itemprop="url" rel="index"><span itemprop="name">App Development</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">The stripe implementation on .NET and flutter. Payment methods includes Native Pay and Credit Card.</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+            <img src="https://stripe.com/img/v3/home/social.png" itemprop="contentUrl">
+        </div>
+        <span id="more"></span>
+
+<h1 id="Payment-Methods"><a href="#Payment-Methods" class="headerlink" title="Payment Methods"></a>Payment Methods</h1><p>Two typs of the payment method we will be using in our App. </p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Credit Card</li>
+<li><input checked="" disabled="" type="checkbox"> Native</li>
+<li><input disabled="" type="checkbox"> WeChat</li>
+<li><input disabled="" type="checkbox"> Ali</li>
+</ul>
+<h1 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h1><h2 id="Payment-Process-for-Credit-Card"><a href="#Payment-Process-for-Credit-Card" class="headerlink" title="Payment Process for Credit Card"></a>Payment Process for Credit Card</h2><p>Basically, the user will need a <code>PaymentIntendId</code> to pay. This PaymentIntent instance will firstly be created in the server side with the <em>Amount</em> and <em>Currency</em> you want to request from customers. After the PaymentIntent is created by the Stripe PaymentIntent API, your server side will get the Id of PaymentIntent. This id can retrieve the information of PaymentIntent in the client side, and request the customer to paid for the <code>$amount currency</code> you set.</p>
+<p>The <strong>process</strong> can be simplified to these steps in our app:</p>
+<ul>
+<li>User select <code>PaymentMethod</code> as <em>NativePay</em>.</li>
+<li>Creating <code>Order</code> instance in the frontend, and sending the request to backend for creating this <code>Order</code> in the database. At the same time, server will:<ul>
+<li>Calculate the total price for payment.</li>
+<li>Checking in stock quantity for every orderItem. </li>
+<li>When backend detect that this payment request will be using credit card, the backend will create an <code>PaymentIntent</code> instance, which will give you a <code>client-secret</code>. At the same time, the <code>PaymentIntent.Id</code> will be saved in <code>Order</code> as well.</li>
+<li>Set the <code>PaymentStatus</code> to <strong>Unpaid</strong>.<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (orderEntity.PaymentMethod == Order.ESuppportPaymentMethod.CreditCard)</span><br><span class="line">&#123;</span><br><span class="line">    stripe.PaymentIntentCreateOptions options = <span class="keyword">new</span> stripe.PaymentIntentCreateOptions</span><br><span class="line">    &#123;</span><br><span class="line">        Amount = (<span class="built_in">long</span>)orderEntity.OutputTotalPrice,</span><br><span class="line">        Currency = orderEntity.OutputCurrency,</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    stripe.PaymentIntentService service = <span class="keyword">new</span> stripe.PaymentIntentService();</span><br><span class="line">    stripe.PaymentIntent paymentIntent = service.Create(options);</span><br><span class="line">    orderEntity.StripeClientSecret = paymentIntent.ClientSecret;</span><br><span class="line">    orderEntity.StripeCreditCardPaymentIntentId = paymentIntent.Id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>Send the <code>client-secret</code> from server-side to client-side.</li>
+<li>Using the <code>client-secret</code> to retrieve the information of <strong>PaymentIntent</strong> in the client-side.</li>
+<li>With the helps from <a target="_blank" rel="noopener" href="https://pub.dev/packages/stripe_payment">[stripe_payment package]</a>, we can confirm the payment like this:<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;PaymentIntentResult&gt; payByCreaditCard(</span><br><span class="line">  BuildContext context,</span><br><span class="line">  <span class="built_in">String</span> name,</span><br><span class="line">  Order order,</span><br><span class="line">) <span class="keyword">async</span> &#123;</span><br><span class="line">  PaymentIntentResult result = <span class="keyword">await</span> StripePayment.confirmPaymentIntent(</span><br><span class="line">    PaymentIntent(</span><br><span class="line">      clientSecret: order.stripeClientSecret,</span><br><span class="line">    ),</span><br><span class="line">  );</span><br><span class="line">  <span class="built_in">bool</span> success =</span><br><span class="line">      result.status == <span class="string">&quot;succeeded&quot;</span> &amp;&amp; result.paymentIntentId != <span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">if</span> (!success) &#123;</span><br><span class="line">    <span class="keyword">throw</span> Exception(<span class="string">&quot;Card Payment fail, with status <span class="subst">$&#123;result.status&#125;</span>&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>After the payment process in doen in the client-side, call <code>CompletePaymentProcessForOrder</code> end-point in the server to set the <code>PaymentStatus</code> to <strong>Pending</strong><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// In Swtich</span></span><br><span class="line"><span class="keyword">case</span> Order.ESuppportPaymentMethod.CreditCard:</span><br><span class="line">    <span class="built_in">bool</span> invalidCardPayment = <span class="built_in">string</span>.IsNullOrWhiteSpace(paidInfo.CreditCardPaymentIntentId) || paidInfo.CreditCardPaymentIntentId != orderFromRepo.StripeCreditCardPaymentIntentId;</span><br><span class="line">    <span class="keyword">if</span> (invalidCardPayment) <span class="keyword">return</span> BadRequest();</span><br><span class="line">    <span class="keyword">if</span> (orderFromRepo.PaymentStatus == Order.EPaymentStatus.Unpaid)</span><br><span class="line">    &#123;</span><br><span class="line">        orderFromRepo.PaymentStatus = Order.EPaymentStatus.Pending;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure></li>
+<li>We also have to add a webhook in the server-side to listen to the webhook when payment succeed. One we got the StripeEvent with type of success, we can set the <code>PaymentStatus</code> to <strong>Success</strong><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Handle the event</span></span><br><span class="line"><span class="keyword">if</span> (stripeEvent.Type == stripe.Events.PaymentIntentSucceeded)</span><br><span class="line">&#123;</span><br><span class="line">    stripe.PaymentIntent paymentIntent = stripeEvent.Data.Object <span class="keyword">as</span> stripe.PaymentIntent;</span><br><span class="line"></span><br><span class="line">    Order orderFromRepo = <span class="keyword">await</span> _orderRepository.GetOrderbyStripePaymentIntentId(paymentIntent.Id);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Do something with the order...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">await</span> _orderRepository.Save();</span><br><span class="line">    Console.WriteLine(<span class="string">&quot;PaymentIntent was successful!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>To test the webhook follow the <a target="_blank" rel="noopener" href="https://stripe.com/docs/webhooks/test">[Official Instruction]</a>. And don’t forget to match your API version (Which can be set in the <a target="_blank" rel="noopener" href="https://dashboard.stripe.com/developers">[Dashboard]</a>) and your server-side version, or may get some errors like this: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;Received event with API version 2019-02-11, but Stripe.net 37.16.0 expects API version 2020-03-02. We recommend that you create a WebhookEndpoint with this API version. Otherwise, you can disable this exception by passing `throwOnApiVersionMismatch: false` to `Stripe.EventUtility.ParseEvent` or `Stripe.EventUtility.ConstructEvent`, but be wary that objects may be incorrectly deserialized.&quot;&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Payment-Process-for-Native-Pay"><a href="#Payment-Process-for-Native-Pay" class="headerlink" title="Payment Process for Native Pay"></a>Payment Process for Native Pay</h2><p>The Native is easier and more nature to set up with Flutter.</p>
+<ul>
+<li>User select <code>PaymentMethod</code> as <em>NativePay</em>.</li>
+<li>Creating order instance in client-side.</li>
+<li>Sending the Order to server for approvement. The service will: <ul>
+<li>Calculate the total price.</li>
+<li>Checking if the item still has enought quantity in stock.</li>
+<li>Set <code>PaymentStatus</code> to <strong>Unpaid</strong></li>
+</ul>
+</li>
+<li>Request Native Pay to Stripe, which will return a <code>Token</code> instance.</li>
+<li>Send the <code>tokenId</code> to server-side and save with the <code>Order</code>. </li>
+<li>Update the <code>PaymentStatus</code> to <strong>Success</strong> (No pending status for Native Pay).</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// In Swtich</span></span><br><span class="line"><span class="keyword">case</span> Order.ESuppportPaymentMethod.Native:</span><br><span class="line">    <span class="built_in">bool</span> invalidNativePay = <span class="built_in">string</span>.IsNullOrWhiteSpace(paidInfo.NativePayTokenId);</span><br><span class="line">    <span class="keyword">if</span> (invalidNativePay) <span class="keyword">return</span> BadRequest();</span><br><span class="line">    orderFromRepo.StripeNativePaymentTokenId = paidInfo.NativePayTokenId;</span><br><span class="line">    <span class="keyword">if</span> (orderFromRepo.PaymentStatus == Order.EPaymentStatus.Unpaid)</span><br><span class="line">    &#123;</span><br><span class="line">        orderFromRepo.PaymentStatus = Order.EPaymentStatus.Success;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Dependencies"><a href="#Dependencies" class="headerlink" title="Dependencies"></a>Dependencies</h1><h2 id="Dart-Packages"><a href="#Dart-Packages" class="headerlink" title="Dart Packages:"></a>Dart Packages:</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://pub.dev/packages/stripe_payment">[stripe_payment]</a></li>
+</ul>
+<h2 id="NuGet"><a href="#NuGet" class="headerlink" title="NuGet:"></a>NuGet:</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/stripe/stripe-dotnet">[Strip.net]</a></li>
+</ul>
+<h1 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://stripe.com/docs/webhooks/build">[Listen to WebHook]</a></li>
+<li><a target="_blank" rel="noopener" href="https://stripe.com/docs">[Stripe Doc]</a></li>
+<li><a target="_blank" rel="noopener" href="https://stripe.com/docs/api">[Stripe API]</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/@hamza39460/stripe-payments-in-flutter-cb2f9cb053d1">[Clear Elaboration]</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/flutter-community/build-a-marketplace-in-your-flutter-app-and-accept-payments-using-stripe-and-firebase-72f3f7228625">[Clear Elaboration II]</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Flutter/" rel="tag"># Flutter</a>
+              <a href="/tags/NET/" rel="tag"># .NET</a>
+              <a href="/tags/Stripe/" rel="tag"># Stripe</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/07/25/2018-07-25-Applying_SAGAN_on_SuperResolution/" rel="prev" title="Applying SAGAN on Super Resolution">
+      <i class="fa fa-chevron-left"></i> Applying SAGAN on Super Resolution
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/08/22/2020-08-12-TestingStripWithAzure/" rel="next" title="Testing the stripe with Azure server side.">
+      Testing the stripe with Azure server side. <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Payment-Methods"><span class="nav-number">1.</span> <span class="nav-text">Payment Methods</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Process"><span class="nav-number">2.</span> <span class="nav-text">Process</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Payment-Process-for-Credit-Card"><span class="nav-number">2.1.</span> <span class="nav-text">Payment Process for Credit Card</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Payment-Process-for-Native-Pay"><span class="nav-number">2.2.</span> <span class="nav-text">Payment Process for Native Pay</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dependencies"><span class="nav-number">3.</span> <span class="nav-text">Dependencies</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dart-Packages"><span class="nav-number">3.1.</span> <span class="nav-text">Dart Packages:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NuGet"><span class="nav-number">3.2.</span> <span class="nav-text">NuGet:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ref"><span class="nav-number">4.</span> <span class="nav-text">Ref</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Chihcheng Hsieh"
+      src="https://avatars.githubusercontent.com/u/37566901">
+  <p class="site-author-name" itemprop="name">Chihcheng Hsieh</p>
+  <div class="site-description" itemprop="description">A site for recording my personal projects and readings.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ChihchengHsieh" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ChihchengHsieh" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chihcheng Hsieh</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
