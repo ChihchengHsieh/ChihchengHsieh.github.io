@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|PT Serif:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chihchenghsieh.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Before reading This is not a typical XAI method for every case. It required a highly sepcific dataset to form the explanation    This work is a extent of NetDissect [1], which has been mentioned in pr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Paper Note] Compositional Explanations of Neurons">
+<meta property="og:url" content="https://chihchenghsieh.github.io/2022/08/23/Compositional-Explanations-of-Neurons/index.html">
+<meta property="og:site_name" content="Chicheng&#39;s Blog">
+<meta property="og:description" content="Before reading This is not a typical XAI method for every case. It required a highly sepcific dataset to form the explanation    This work is a extent of NetDissect [1], which has been mentioned in pr">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/186040540-f33b4daa-be5b-4862-a158-6459a5cf02f1.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/186040667-88efe0bb-f454-4c02-90a2-567c079359c5.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/186040885-86f0d88a-53c1-435d-9525-e1585e6bc5e6.png">
+<meta property="og:image" content="https://miro.medium.com/max/754/1*genWrUqjWKmhptbYsA3T5Q.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/186041526-394f8182-97af-4df1-951a-1cf4e7292666.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/186041609-78134909-8046-4c1f-b83a-40247fb658df.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/186041820-db502f01-139d-4e0c-bf78-9cbb71a535d5.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/186042005-27ab376b-265f-43be-8508-a0a294afe03a.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/186042102-bcf234a0-ecd2-4bb2-b437-ea6caa27f2d5.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/186042152-f0ca1c2a-5a22-42c7-a363-af4456f9d14c.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/186042265-1e7ae61e-6ab3-4828-a8bd-ab10740c3799.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/186042381-0b49acc6-1f07-4dc9-9bf2-6c2b97253977.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/186042397-e1def148-0ba8-4560-9d84-ac34e8641923.png">
+<meta property="article:published_time" content="2022-08-22T23:58:47.000Z">
+<meta property="article:modified_time" content="2022-08-22T23:58:47.000Z">
+<meta property="article:author" content="Chihcheng Hsieh">
+<meta property="article:tag" content="XAI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/37566901/186040540-f33b4daa-be5b-4862-a158-6459a5cf02f1.png">
+
+<link rel="canonical" href="https://chihchenghsieh.github.io/2022/08/23/Compositional-Explanations-of-Neurons/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>[Paper Note] Compositional Explanations of Neurons | Chicheng's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Chicheng's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">PhD := Pathetic Human Dying, But Enjoyable.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2022/08/23/Compositional-Explanations-of-Neurons/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/37566901">
+      <meta itemprop="name" content="Chihcheng Hsieh">
+      <meta itemprop="description" content="A site for recording my personal projects and readings.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chicheng's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Paper Note] Compositional Explanations of Neurons
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-08-23 09:58:47" itemprop="dateCreated datePublished" datetime="2022-08-23T09:58:47+10:00">2022-08-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Paper-Notes/" itemprop="url" rel="index"><span itemprop="name">Paper Notes</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Before-reading"><a href="#Before-reading" class="headerlink" title="Before reading"></a>Before reading</h1><ul>
+<li>This is not a typical XAI method for every case. It required a highly sepcific dataset to form the explanation</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/37566901/186040540-f33b4daa-be5b-4862-a158-6459a5cf02f1.png" alt="image"></p>
+<ul>
+<li>This work is a extent of <strong>NetDissect</strong> [1], which has been mentioned in previous <a target="_blank" rel="noopener" href="https://medium.com/@chihcheng.hsieh.82/paper-note-network-dissection-quantifying-interpretability-of-deep-visual-representations-3adb3f8ebdd">note</a>.</li>
+</ul>
+<span id="more"></span>
+
+<p><img src="https://user-images.githubusercontent.com/37566901/186040667-88efe0bb-f454-4c02-90a2-567c079359c5.png" alt="image"></p>
+<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>Since the use cases for datasets and models are identical to NetDissect, we will skip these two parts and go straight into explain the basic idea of this work.</p>
+<ol>
+<li><p><strong>Changes</strong>. In this section, we explain what are the basic idea of this work, and how is it different from NetDissect.</p>
+</li>
+<li><p><strong>Result</strong>. What is the results they obtained, and how is it differnt to NetDissect.</p>
+</li>
+</ol>
+<h1 id="Changes"><a href="#Changes" class="headerlink" title="Changes"></a>Changes</h1><h2 id="NetDissect"><a href="#NetDissect" class="headerlink" title="NetDissect"></a>NetDissect</h2><p>This work is extended from a previous work called, NetDissect. NetDissect is to explain the neuron by searching for the concept $C$ that is most similar to the neoron’s activation maps. To determine which concept activate, this is the optimisation equation:</p>
+<p><img src="https://user-images.githubusercontent.com/37566901/186040885-86f0d88a-53c1-435d-9525-e1585e6bc5e6.png" alt="image"></p>
+<p>Where</p>
+<p><img src="https://miro.medium.com/max/754/1*genWrUqjWKmhptbYsA3T5Q.png" alt="image"></p>
+<p>DissectNet search the concepts to find the one can activate the specific neuron most. And, the neuron can be seen as a detector for that concept.</p>
+<h2 id="This-work"><a href="#This-work" class="headerlink" title="This work"></a>This work</h2><p>In NetDissect, they are trying to find the <em><strong>one concept</strong></em> that can activate the neuron most. And, in this work, they believe the neuron is not only for detect ing single concept but for detecting a <em><strong>logical forms</strong></em>. In the image belwo, (d) is the single concept used in NetDissect. And this work is using the logical forms in (f). However, both of them use the smae IoU technique for finding the best matches.<br><img src="https://user-images.githubusercontent.com/37566901/186041526-394f8182-97af-4df1-951a-1cf4e7292666.png" alt="image"></p>
+<p>Because this work is searching for a logical form (a set of concepts) instead of single concept, beam searching is used for finding the best composition of concepts.<br><img src="https://user-images.githubusercontent.com/37566901/186041609-78134909-8046-4c1f-b83a-40247fb658df.png" alt="image"></p>
+<p>So it’s not an extra loss function that forcing the neural network to learn semantic meaning. Instead of doing that, they proposed a method to search the <strong>Logical Form</strong>, which can be seen as the condition of occurence and absence of concepts. To be straightforward, this work is aiming to find logical forms of concepts for each neuron. Or we can say, the searching process is to “find which combimation (composition) has the highest with that neuron’s activation map (Mask for measuring IoU)”.</p>
+<h2 id="Natural-Language-Inference-NLI"><a href="#Natural-Language-Inference-NLI" class="headerlink" title="Natural Language Inference (NLI)"></a>Natural Language Inference (NLI)</h2><p>Task description. Since NLI is not used in NetDissect, we briefly describe this task here. Given premise and hypothesis sentences, the task of NLI is to determine whether the premise entails the hypothesis, contradicts it, or neither (neutral).</p>
+<p><img src="https://user-images.githubusercontent.com/37566901/186041820-db502f01-139d-4e0c-bf78-9cbb71a535d5.png" alt="image"></p>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p><img src="https://user-images.githubusercontent.com/37566901/186042005-27ab376b-265f-43be-8508-a0a294afe03a.png" alt="image"></p>
+<h1 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h1><h2 id="Image-Classification-Task"><a href="#Image-Classification-Task" class="headerlink" title="Image Classification Task"></a>Image Classification Task</h2><p><img src="https://user-images.githubusercontent.com/37566901/186042102-bcf234a0-ecd2-4bb2-b437-ea6caa27f2d5.png" alt="image"></p>
+<h2 id="Natural-Language-Inference"><a href="#Natural-Language-Inference" class="headerlink" title="Natural Language Inference"></a>Natural Language Inference</h2><p><img src="https://user-images.githubusercontent.com/37566901/186042152-f0ca1c2a-5a22-42c7-a363-af4456f9d14c.png" alt="image"></p>
+<h2 id="Do-interpretable-neurons-contribute-to-model-accuracy"><a href="#Do-interpretable-neurons-contribute-to-model-accuracy" class="headerlink" title="Do interpretable neurons contribute to model accuracy?"></a>Do interpretable neurons contribute to model accuracy?</h2><p>A: Only for Image classification task.<br><img src="https://user-images.githubusercontent.com/37566901/186042265-1e7ae61e-6ab3-4828-a8bd-ab10740c3799.png" alt="image"></p>
+<h2 id="Munipulate-predictions"><a href="#Munipulate-predictions" class="headerlink" title="Munipulate predictions"></a>Munipulate predictions</h2><p>By understanding how the neoron is activated for classfication, we can manipulate the input to obtain desired result. It is like the feeling of counterfactual.</p>
+<p><img src="https://user-images.githubusercontent.com/37566901/186042381-0b49acc6-1f07-4dc9-9bf2-6c2b97253977.png" alt="image"><br><img src="https://user-images.githubusercontent.com/37566901/186042397-e1def148-0ba8-4560-9d84-ac34e8641923.png" alt="image"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/XAI/" rel="tag"># XAI</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/08/22/2022-08-22-NetDissect/" rel="prev" title="[Paper Note] Network Dissection: Quantifying Interpretability of Deep Visual Representations">
+      <i class="fa fa-chevron-left"></i> [Paper Note] Network Dissection: Quantifying Interpretability of Deep Visual Representations
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Before-reading"><span class="nav-number">1.</span> <span class="nav-text">Before reading</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Overview"><span class="nav-number">2.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Changes"><span class="nav-number">3.</span> <span class="nav-text">Changes</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NetDissect"><span class="nav-number">3.1.</span> <span class="nav-text">NetDissect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#This-work"><span class="nav-number">3.2.</span> <span class="nav-text">This work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Natural-Language-Inference-NLI"><span class="nav-number">3.3.</span> <span class="nav-text">Natural Language Inference (NLI)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Example"><span class="nav-number">3.3.1.</span> <span class="nav-text">Example</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Results"><span class="nav-number">4.</span> <span class="nav-text">Results</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Image-Classification-Task"><span class="nav-number">4.1.</span> <span class="nav-text">Image Classification Task</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Natural-Language-Inference"><span class="nav-number">4.2.</span> <span class="nav-text">Natural Language Inference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Do-interpretable-neurons-contribute-to-model-accuracy"><span class="nav-number">4.3.</span> <span class="nav-text">Do interpretable neurons contribute to model accuracy?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Munipulate-predictions"><span class="nav-number">4.4.</span> <span class="nav-text">Munipulate predictions</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Chihcheng Hsieh"
+      src="https://avatars.githubusercontent.com/u/37566901">
+  <p class="site-author-name" itemprop="name">Chihcheng Hsieh</p>
+  <div class="site-description" itemprop="description">A site for recording my personal projects and readings.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ChihchengHsieh" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ChihchengHsieh" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chihcheng Hsieh</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
