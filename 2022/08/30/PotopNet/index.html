@@ -19,20 +19,26 @@
     var CONFIG = {"hostname":"chihchenghsieh.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="A site for recording my personal projects and readings.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Tags">
-<meta property="og:url" content="https://chihchenghsieh.github.io/tags/index.html">
+  <meta name="description" content="Before Reading: Although ProtoPNet can apply different backbones in their model, this is still an intrinsic approach for explanability, which means it require a very specific architecture to generate">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Paper Note] This Looks Like That: Deep Learning for Interpretable Image Recognition (ProtoPNet)">
+<meta property="og:url" content="https://chihchenghsieh.github.io/2022/08/30/PotopNet/index.html">
 <meta property="og:site_name" content="Chicheng&#39;s Blog">
-<meta property="og:description" content="A site for recording my personal projects and readings.">
+<meta property="og:description" content="Before Reading: Although ProtoPNet can apply different backbones in their model, this is still an intrinsic approach for explanability, which means it require a very specific architecture to generate">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-07-14T08:02:02.000Z">
-<meta property="article:modified_time" content="2020-07-14T08:02:02.000Z">
+<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/187326894-8c8946d6-80ac-48d7-89f7-c62489e627e9.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/187327301-e8ca4e8d-3517-4756-ba78-8704af8c5702.png">
+<meta property="og:image" content="https://github.com/ChihchengHsieh/Note/blob/main/PhD/ProtoPNet.png?raw=true">
+<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/187413205-a18c2940-e565-4f31-b299-cc1392a19697.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/187413358-0ddac845-bd6d-4736-af0c-a1441be1b1ca.png">
+<meta property="article:published_time" content="2022-08-30T01:16:31.000Z">
+<meta property="article:modified_time" content="2022-08-30T01:16:31.000Z">
 <meta property="article:author" content="Chihcheng Hsieh">
-<meta property="article:tag" content="Richard">
+<meta property="article:tag" content="XAI">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/37566901/187326894-8c8946d6-80ac-48d7-89f7-c62489e627e9.png">
 
-<link rel="canonical" href="https://chihchenghsieh.github.io/tags/">
+<link rel="canonical" href="https://chihchenghsieh.github.io/2022/08/30/PotopNet/">
 
 
 <script id="page-configurations">
@@ -40,13 +46,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Tags | Chicheng's Blog
-</title>
+  <title>[Paper Note] This Looks Like That: Deep Learning for Interpretable Image Recognition (ProtoPNet) | Chicheng's Blog</title>
   
 
 
@@ -145,51 +150,110 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content post posts-expand">
             
 
     
-    
-    
-    <div class="post-block" lang="en">
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2022/08/30/PotopNet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/37566901">
+      <meta itemprop="name" content="Chihcheng Hsieh">
+      <meta itemprop="description" content="A site for recording my personal projects and readings.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chicheng's Blog">
+    </span>
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Paper Note] This Looks Like That: Deep Learning for Interpretable Image Recognition (ProtoPNet)
+        </h1>
 
-<h1 class="post-title" itemprop="name headline">Tags
-</h1>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
 
-<div class="post-meta">
+              <time title="Created: 2022-08-30 11:16:31" itemprop="dateCreated datePublished" datetime="2022-08-30T11:16:31+10:00">2022-08-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Paper-Notes/" itemprop="url" rel="index"><span itemprop="name">Paper Notes</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://user-images.githubusercontent.com/37566901/187326894-8c8946d6-80ac-48d7-89f7-c62489e627e9.png" alt="image"></p>
+<h1 id="Before-Reading"><a href="#Before-Reading" class="headerlink" title="Before Reading:"></a>Before Reading:</h1><ol>
+<li>Although ProtoPNet can apply different backbones in their model, this is still an intrinsic approach for explanability, which means it require a very specific architecture to generate explanations.</li>
+</ol>
+<span id="more"></span>
+
+
+<h1 id="ProtopNet"><a href="#ProtopNet" class="headerlink" title="ProtopNet"></a>ProtopNet</h1><p>The author gave the figure below in the paper to explain the over architecture of ProtoPNet, but I found it confusing until I read through the whole paper 😂. However, the ideas and formulas they proposed make this paper so pleasing to read.</p>
+<p><img src="https://user-images.githubusercontent.com/37566901/187327301-e8ca4e8d-3517-4756-ba78-8704af8c5702.png" alt="image"></p>
+<p>To express the architecture in the way I’m familiar with, this will be:</p>
+<p><img src="https://github.com/ChihchengHsieh/Note/blob/main/PhD/ProtoPNet.png?raw=true" alt="image">‘</p>
+<ol>
+<li>The input image is passed into a CNN backbone to get the feature map.</li>
+<li>The feature map is seen as several patches with size as 1 x 1 x D. </li>
+<li>Each patch is then compared to prototypes to calculate the simlarity between them to obtain the similarty map (activation map).</li>
+<li>By max-pooling the similarty map, it will give us the similarity score for each patch.</li>
+<li>The similartiy scores are then passed into the fully connected layer to get the final prediction.</li>
+</ol>
+<h1 id="Mathematically"><a href="#Mathematically" class="headerlink" title="Mathematically"></a>Mathematically</h1><p><img src="https://user-images.githubusercontent.com/37566901/187413205-a18c2940-e565-4f31-b299-cc1392a19697.png" alt="image"></p>
+<p><img src="https://user-images.githubusercontent.com/37566901/187413358-0ddac845-bd6d-4736-af0c-a1441be1b1ca.png" alt="image"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/XAI/" rel="tag"># XAI</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/08/23/Compositional-Explanations-of-Neurons/" rel="prev" title="[Paper Note] Compositional Explanations of Neurons">
+      <i class="fa fa-chevron-left"></i> [Paper Note] Compositional Explanations of Neurons
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-              5 tags in total
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/NET/" style="font-size: 24px; color: #4f4f4f">.NET</a> <a href="/tags/Flutter/" style="font-size: 18px; color: #8e8e8e">Flutter</a> <a href="/tags/GAN/" style="font-size: 30px; color: #111">GAN</a> <a href="/tags/Stripe/" style="font-size: 12px; color: #ccc">Stripe</a> <a href="/tags/XAI/" style="font-size: 18px; color: #8e8e8e">XAI</a>
-            </div>
-          </div>
-        
-      </div>
-      
-      
-      
-    </div>
-    
-
-    
-    
-    
 
 
           </div>
@@ -240,6 +304,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Before-Reading"><span class="nav-number">1.</span> <span class="nav-text">Before Reading:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ProtopNet"><span class="nav-number">2.</span> <span class="nav-text">ProtopNet</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mathematically"><span class="nav-number">3.</span> <span class="nav-text">Mathematically</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
