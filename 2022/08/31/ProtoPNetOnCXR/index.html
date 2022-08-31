@@ -19,30 +19,25 @@
     var CONFIG = {"hostname":"chihchenghsieh.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Before Reading This is not a typical XAI method for every case. It required a highly sepcific dataset to form the explanation. It is a work trying to find out how NN work internally but not to study w">
+  <meta name="description" content="Before reading This paper is an extention of ProtoPNet [2]. They applied small changes to fit the model on mammographic image classification.  Overview of interpretable AI algorithm for breast lesions">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[Paper Note] Network Dissection: Quantifying Interpretability of Deep Visual Representations">
-<meta property="og:url" content="https://chihchenghsieh.github.io/2022/08/22/2022-08-22-NetDissect/index.html">
+<meta property="og:title" content="ProtoPNetOnCXR">
+<meta property="og:url" content="https://chihchenghsieh.github.io/2022/08/31/ProtoPNetOnCXR/index.html">
 <meta property="og:site_name" content="Chicheng&#39;s Blog">
-<meta property="og:description" content="Before Reading This is not a typical XAI method for every case. It required a highly sepcific dataset to form the explanation. It is a work trying to find out how NN work internally but not to study w">
+<meta property="og:description" content="Before reading This paper is an extention of ProtoPNet [2]. They applied small changes to fit the model on mammographic image classification.  Overview of interpretable AI algorithm for breast lesions">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/186035105-ff911ba4-2d6e-48f2-9cbc-f2d88697e01a.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/185823246-6f7fd346-d06d-43b8-8454-bb515493a718.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/185826161-ff77174c-26e1-4cbd-bc96-d514a11f4e53.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/186038893-7f6a133d-4997-4254-a974-b27a4c5af2e7.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/186039035-1f264401-9e53-497e-9abe-1583a72d4ed2.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/186039231-5db6e333-b8f8-41d6-959c-74d9c9fd3501.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/186039308-d7d80ef7-48dd-48ca-ade8-47e50ccbe501.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/186039371-dd848b6a-839a-4df9-8c1c-87ca52b47c3c.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/186039487-51b6cd73-7f72-4187-a96a-b7a0d2ca4ad4.png">
-<meta property="article:published_time" content="2022-08-22T01:42:36.000Z">
-<meta property="article:modified_time" content="2022-08-22T01:42:36.000Z">
+<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/187564235-d483bfb1-7a48-4158-86e4-87239149d85b.png">
+<meta property="og:image" content="https://github.com/ChihchengHsieh/Note/blob/main/PhD/ProtoPNetOnCXR.png?raw=true">
+<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/187614953-20887430-9390-4d85-b18e-c3e0f76b4975.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/187615068-e2261b44-227a-404d-9f7c-06af6e1cec21.png">
+<meta property="article:published_time" content="2022-08-30T22:20:29.000Z">
+<meta property="article:modified_time" content="2022-08-30T22:20:29.000Z">
 <meta property="article:author" content="Chihcheng Hsieh">
 <meta property="article:tag" content="XAI">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://user-images.githubusercontent.com/37566901/186035105-ff911ba4-2d6e-48f2-9cbc-f2d88697e01a.png">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/37566901/187564235-d483bfb1-7a48-4158-86e4-87239149d85b.png">
 
-<link rel="canonical" href="https://chihchenghsieh.github.io/2022/08/22/2022-08-22-NetDissect/">
+<link rel="canonical" href="https://chihchenghsieh.github.io/2022/08/31/ProtoPNetOnCXR/">
 
 
 <script id="page-configurations">
@@ -55,7 +50,7 @@
   };
 </script>
 
-  <title>[Paper Note] Network Dissection: Quantifying Interpretability of Deep Visual Representations | Chicheng's Blog</title>
+  <title>ProtoPNetOnCXR | Chicheng's Blog</title>
   
 
 
@@ -162,7 +157,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2022/08/22/2022-08-22-NetDissect/">
+    <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2022/08/31/ProtoPNetOnCXR/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://avatars.githubusercontent.com/u/37566901">
@@ -175,7 +170,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          [Paper Note] Network Dissection: Quantifying Interpretability of Deep Visual Representations
+          ProtoPNetOnCXR
         </h1>
 
         <div class="post-meta">
@@ -185,7 +180,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-08-22 11:42:36" itemprop="dateCreated datePublished" datetime="2022-08-22T11:42:36+10:00">2022-08-22</time>
+              <time title="Created: 2022-08-31 08:20:29" itemprop="dateCreated datePublished" datetime="2022-08-31T08:20:29+10:00">2022-08-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -208,60 +203,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Before-Reading"><a href="#Before-Reading" class="headerlink" title="Before Reading"></a>Before Reading</h1><ul>
-<li>This is not a typical XAI method for every case. It required a highly sepcific dataset to form the explanation.<br><img src="https://user-images.githubusercontent.com/37566901/186035105-ff911ba4-2d6e-48f2-9cbc-f2d88697e01a.png" alt="image"></li>
-<li>It is a work trying to find out how NN work internally but not to study why a model get a specific prediction. (I frogot the terms for these two types of XAI methods🥲)</li>
-</ul>
-<span id="more"></span>
-
-<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><ol>
-<li><strong>Dataset</strong>. Explaining what kind dataste is required for performing NetDissect. (It it super hard to get a dataset like this for your work, and this is why NetDissect is not the one to use for explaining other common tasks.)</li>
-<li><strong>Model</strong>. Simply metion what type of model can be applied to NetDissect.</li>
-<li><strong>NetDissect</strong>. Talk about what NetDissect is and how does is applied to the model.</li>
-<li><strong>Results</strong>. Show the results of NetDissect.</li>
+        <h1 id="Before-reading"><a href="#Before-reading" class="headerlink" title="Before reading"></a>Before reading</h1><ol>
+<li>This paper is an extention of ProtoPNet [2]. They applied small changes to fit the model on mammographic image classification.</li>
 </ol>
-<h1 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h1><p>This work created a new dataset, Broadly and Densely Labeled Dataset (Broden), which is made by multiple scene, texture and color dataset to form the idea of visual “Concepts”.</p>
-<p><img src="https://user-images.githubusercontent.com/37566901/185823246-6f7fd346-d06d-43b8-8454-bb515493a718.png"></p>
-<img width="1167" alt="image" src="https://user-images.githubusercontent.com/37566901/185826161-ff77174c-26e1-4cbd-bc96-d514a11f4e53.png">
-
-<h2 id="Dataset-Requirement-for-NetDissect"><a href="#Dataset-Requirement-for-NetDissect" class="headerlink" title="Dataset Requirement for NetDissect"></a>Dataset Requirement for NetDissect</h2><p>To train the model and generate its neoron explaination using NetDissect, it required the dataset to have following contents.</p>
-<ol>
-<li>Images</li>
-<li>Segementations of concepts for calculating IoUs</li>
-<li>Labels of concepts</li>
+<h1 id="Overview-of-interpretable-AI-algorithm-for-breast-lesions-IAIA-BL"><a href="#Overview-of-interpretable-AI-algorithm-for-breast-lesions-IAIA-BL" class="headerlink" title="Overview of interpretable AI algorithm for breast lesions (IAIA-BL)"></a>Overview of interpretable AI algorithm for breast lesions (IAIA-BL)</h1><p>The same concept of figure is used as the one in ProtoPNet:</p>
+<p><img src="https://user-images.githubusercontent.com/37566901/187564235-d483bfb1-7a48-4158-86e4-87239149d85b.png" alt="image"></p>
+<p>To adapt to a my version:</p>
+<p><img src="https://github.com/ChihchengHsieh/Note/blob/main/PhD/ProtoPNetOnCXR.png?raw=true" alt="image"></p>
+<h2 id="Changes-compared-to-original-ProtoPNet"><a href="#Changes-compared-to-original-ProtoPNet" class="headerlink" title="Changes compared to original ProtoPNet"></a>Changes compared to original ProtoPNet</h2><ol>
+<li>Pick up the top-k to do average pooling instead of max pooling for similarity score.</li>
+<li>Introduce fine annotation loss.</li>
+<li>Add one more fully connected layer before the prediction to calculate the score for each mass-margin type.</li>
 </ol>
-<h1 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h1><p>This work is task- and model-agnostic. It requires only the dataset to be annotated with concepts, which is usually the hardest part of ML. Although it claim to be model-agnostic, your model still need 2 things:</p>
-<ul>
-<li>Have nuerons accessible for us to observe its behaviour.</li>
-<li>Can generate heatmaps of Class Activation Mapping (CAM), which means the model are differentiable for calculating gradients.</li>
-</ul>
-<p>Which means, it will be a method used for Neural Network mostly.</p>
-<h1 id="NetDissect"><a href="#NetDissect" class="headerlink" title="NetDissect"></a>NetDissect</h1><p><img src="https://user-images.githubusercontent.com/37566901/186038893-7f6a133d-4997-4254-a974-b27a4c5af2e7.png" alt="image"></p>
-<p>As we have mentioned the datasets in previous section, the NetDissect is pretty straightforward. Let’s go through the whole procedure pretty quick:</p>
-<ul>
-<li><strong>Train</strong>. As usual, you will need train the model first. And, the requirements of model and dataset are stated in previous sections.</li>
-<li><strong>Obtain activation maps</strong>. Once having trained model, we then generate the activation map for each input image.</li>
-</ul>
-<p><img src="https://user-images.githubusercontent.com/37566901/186039035-1f264401-9e53-497e-9abe-1583a72d4ed2.png" alt="image"></p>
-<ul>
-<li><strong>Scaled it to the input image size</strong>. By aligning the activation map, we can know which part of image activate that specific neuron most.</li>
-</ul>
-<p><img src="https://user-images.githubusercontent.com/37566901/186039231-5db6e333-b8f8-41d6-959c-74d9c9fd3501.png" alt="image"></p>
-<ul>
-<li><strong>Tranform activation maps to masks</strong>.  Activation maps are then transform into masks by upsampling to the image size and only selecting the parts of image that activate the unit (channel).</li>
-</ul>
-<p><img src="https://user-images.githubusercontent.com/37566901/186039308-d7d80ef7-48dd-48ca-ade8-47e50ccbe501.png" alt="image"></p>
-<ul>
-<li><strong>Calculate IoUs</strong>. By using masks generated in previous step and segmentation labels from Broden dataset, we can calculate the IoUs between each unit and Concepts.</li>
-</ul>
-<p><img src="https://user-images.githubusercontent.com/37566901/186039371-dd848b6a-839a-4df9-8c1c-87ca52b47c3c.png" alt="image"></p>
-<ul>
-<li><strong>Determine concepts for units</strong>. If the IoU value between the unit and the concept is above a threshold, we can say this unit is a detector for the concept.</li>
-</ul>
-<h1 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h1><p><img src="https://user-images.githubusercontent.com/37566901/186039487-51b6cd73-7f72-4187-a96a-b7a0d2ca4ad4.png" alt="image"></p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ol>
-<li>Network Dissection: Quantifying Interpretability of Deep Visual Representations (<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1704.05796">https://arxiv.org/abs/1704.05796</a>)</li>
-</ol>
+<h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><h2 id="Mass-margin"><a href="#Mass-margin" class="headerlink" title="Mass-margin"></a>Mass-margin</h2><p><img src="https://user-images.githubusercontent.com/37566901/187614953-20887430-9390-4d85-b18e-c3e0f76b4975.png" alt="image"></p>
+<h2 id="Malignancy"><a href="#Malignancy" class="headerlink" title="Malignancy"></a>Malignancy</h2><p><img src="https://user-images.githubusercontent.com/37566901/187615068-e2261b44-227a-404d-9f7c-06af6e1cec21.png" alt="image"></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[1] Interpretable Mammographic Image Classification using Case-Based Reasoning and Deep Learning (<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2107.05605">https://arxiv.org/abs/2107.05605</a>)</p>
+<p>[2] This Looks Like That: Deep Learning for Interpretable Image Recognition (<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1806.10574">https://arxiv.org/abs/1806.10574</a>)</p>
 
     </div>
 
@@ -280,13 +237,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/08/22/2020-11-21-UseAzureBlobStorageForStoringFiles/" rel="prev" title="使用Azure Blob Storage來存儲檔案(代替Firebase Storage)">
-      <i class="fa fa-chevron-left"></i> 使用Azure Blob Storage來存儲檔案(代替Firebase Storage)
+    <a href="/2022/08/30/PotopNet/" rel="prev" title="[Paper Note] This Looks Like That: Deep Learning for Interpretable Image Recognition (ProtoPNet)">
+      <i class="fa fa-chevron-left"></i> [Paper Note] This Looks Like That: Deep Learning for Interpretable Image Recognition (ProtoPNet)
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/08/23/Compositional-Explanations-of-Neurons/" rel="next" title="[Paper Note] Compositional Explanations of Neurons">
-      [Paper Note] Compositional Explanations of Neurons <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -345,7 +299,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Before-Reading"><span class="nav-number">1.</span> <span class="nav-text">Before Reading</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Overview"><span class="nav-number">2.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dataset"><span class="nav-number">3.</span> <span class="nav-text">Dataset</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dataset-Requirement-for-NetDissect"><span class="nav-number">3.1.</span> <span class="nav-text">Dataset Requirement for NetDissect</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Model"><span class="nav-number">4.</span> <span class="nav-text">Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NetDissect"><span class="nav-number">5.</span> <span class="nav-text">NetDissect</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Results"><span class="nav-number">6.</span> <span class="nav-text">Results</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">7.</span> <span class="nav-text">References</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Before-reading"><span class="nav-number">1.</span> <span class="nav-text">Before reading</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Overview-of-interpretable-AI-algorithm-for-breast-lesions-IAIA-BL"><span class="nav-number">2.</span> <span class="nav-text">Overview of interpretable AI algorithm for breast lesions (IAIA-BL)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Changes-compared-to-original-ProtoPNet"><span class="nav-number">2.1.</span> <span class="nav-text">Changes compared to original ProtoPNet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Result"><span class="nav-number">3.</span> <span class="nav-text">Result</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mass-margin"><span class="nav-number">3.1.</span> <span class="nav-text">Mass-margin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Malignancy"><span class="nav-number">3.2.</span> <span class="nav-text">Malignancy</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -149,6 +149,88 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2022/08/31/ProtoPNetOnCXR/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/37566901">
+      <meta itemprop="name" content="Chihcheng Hsieh">
+      <meta itemprop="description" content="A site for recording my personal projects and readings.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chicheng's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/08/31/ProtoPNetOnCXR/" class="post-title-link" itemprop="url">ProtoPNetOnCXR</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-08-31 08:20:29" itemprop="dateCreated datePublished" datetime="2022-08-31T08:20:29+10:00">2022-08-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Paper-Notes/" itemprop="url" rel="index"><span itemprop="name">Paper Notes</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Before-reading"><a href="#Before-reading" class="headerlink" title="Before reading"></a>Before reading</h1><ol>
+<li>This paper is an extention of ProtoPNet [2]. They applied small changes to fit the model on mammographic image classification.</li>
+</ol>
+<h1 id="Overview-of-interpretable-AI-algorithm-for-breast-lesions-IAIA-BL"><a href="#Overview-of-interpretable-AI-algorithm-for-breast-lesions-IAIA-BL" class="headerlink" title="Overview of interpretable AI algorithm for breast lesions (IAIA-BL)"></a>Overview of interpretable AI algorithm for breast lesions (IAIA-BL)</h1><p>The same concept of figure is used as the one in ProtoPNet:</p>
+<p><img src="https://user-images.githubusercontent.com/37566901/187564235-d483bfb1-7a48-4158-86e4-87239149d85b.png" alt="image"></p>
+<p>To adapt to a my version:</p>
+<p><img src="https://github.com/ChihchengHsieh/Note/blob/main/PhD/ProtoPNetOnCXR.png?raw=true" alt="image"></p>
+<h2 id="Changes-compared-to-original-ProtoPNet"><a href="#Changes-compared-to-original-ProtoPNet" class="headerlink" title="Changes compared to original ProtoPNet"></a>Changes compared to original ProtoPNet</h2><ol>
+<li>Pick up the top-k to do average pooling instead of max pooling for similarity score.</li>
+<li>Introduce fine annotation loss.</li>
+<li>Add one more fully connected layer before the prediction to calculate the score for each mass-margin type.</li>
+</ol>
+<h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><h2 id="Mass-margin"><a href="#Mass-margin" class="headerlink" title="Mass-margin"></a>Mass-margin</h2><p><img src="https://user-images.githubusercontent.com/37566901/187614953-20887430-9390-4d85-b18e-c3e0f76b4975.png" alt="image"></p>
+<h2 id="Malignancy"><a href="#Malignancy" class="headerlink" title="Malignancy"></a>Malignancy</h2><p><img src="https://user-images.githubusercontent.com/37566901/187615068-e2261b44-227a-404d-9f7c-06af6e1cec21.png" alt="image"></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[1] Interpretable Mammographic Image Classification using Case-Based Reasoning and Deep Learning (<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2107.05605">https://arxiv.org/abs/2107.05605</a>)</p>
+<p>[2] This Looks Like That: Deep Learning for Interpretable Image Recognition (<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1806.10574">https://arxiv.org/abs/1806.10574</a>)</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2022/08/30/PotopNet/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -278,7 +360,7 @@
 </ul>
 <p><img src="https://user-images.githubusercontent.com/37566901/186040540-f33b4daa-be5b-4862-a158-6459a5cf02f1.png" alt="image"></p>
 <ul>
-<li>This work is a extent of <strong>NetDissect</strong> [1], which has been mentioned in previous <a target="_blank" rel="noopener" href="https://medium.com/@chihcheng.hsieh.82/paper-note-network-dissection-quantifying-interpretability-of-deep-visual-representations-3adb3f8ebdd">note</a>.</li>
+<li>This work is an extention of <strong>NetDissect</strong> [1], which has been mentioned in previous <a target="_blank" rel="noopener" href="https://medium.com/@chihcheng.hsieh.82/paper-note-network-dissection-quantifying-interpretability-of-deep-visual-representations-3adb3f8ebdd">note</a>.</li>
 </ul>
           <!--noindex-->
             <div class="post-button">
@@ -826,80 +908,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chihchenghsieh.github.io/2018/07/25/2018-07-25-Applying_SAGAN_on_SuperResolution/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/37566901">
-      <meta itemprop="name" content="Chihcheng Hsieh">
-      <meta itemprop="description" content="A site for recording my personal projects and readings.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Chicheng's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/07/25/2018-07-25-Applying_SAGAN_on_SuperResolution/" class="post-title-link" itemprop="url">Applying SAGAN on Super Resolution</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2018-07-25 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-25T00:00:00+10:00">2018-07-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/DL/" itemprop="url" rel="index"><span itemprop="name">DL</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="https://github.com/ChihchengHsieh/Applying-SAGAN-on-Super-Resolution/blob/master/SR_samplesPh.png?raw=true"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/07/25/2018-07-25-Applying_SAGAN_on_SuperResolution/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -971,7 +979,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
