@@ -19,13 +19,14 @@
     var CONFIG = {"hostname":"chihchenghsieh.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Before reading This paper is an extention of ProtoPNet [2]. They applied small changes to fit the model on mammographic image classification.  Overview of interpretable AI algorithm for breast lesions">
+  <meta name="description" content="Before reading This paper is an extention of ProtoPNet [2]. They applied small changes to fit the model on mammographic image classification.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ProtoPNetOnCXR">
+<meta property="og:title" content="[Paper Note] Interpretable Mammographic Image Classification using Case-Based Reasoning and Deep Learning">
 <meta property="og:url" content="https://chihchenghsieh.github.io/2022/08/31/ProtoPNetOnCXR/index.html">
 <meta property="og:site_name" content="Chicheng&#39;s Blog">
-<meta property="og:description" content="Before reading This paper is an extention of ProtoPNet [2]. They applied small changes to fit the model on mammographic image classification.  Overview of interpretable AI algorithm for breast lesions">
+<meta property="og:description" content="Before reading This paper is an extention of ProtoPNet [2]. They applied small changes to fit the model on mammographic image classification.">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://user-images.githubusercontent.com/37566901/187636617-0ae89a55-7c6d-4ed0-bbc8-fce8a9d5f803.png">
 <meta property="og:image" content="https://user-images.githubusercontent.com/37566901/187564235-d483bfb1-7a48-4158-86e4-87239149d85b.png">
 <meta property="og:image" content="https://github.com/ChihchengHsieh/Note/blob/main/PhD/ProtoPNetOnCXR.png?raw=true">
 <meta property="og:image" content="https://user-images.githubusercontent.com/37566901/187615924-c4e6ae2b-04e3-4e25-8402-c708d5561f6a.png">
@@ -40,7 +41,7 @@
 <meta property="article:author" content="Chihcheng Hsieh">
 <meta property="article:tag" content="XAI">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://user-images.githubusercontent.com/37566901/187564235-d483bfb1-7a48-4158-86e4-87239149d85b.png">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/37566901/187636617-0ae89a55-7c6d-4ed0-bbc8-fce8a9d5f803.png">
 
 <link rel="canonical" href="https://chihchenghsieh.github.io/2022/08/31/ProtoPNetOnCXR/">
 
@@ -55,7 +56,7 @@
   };
 </script>
 
-  <title>ProtoPNetOnCXR | Chicheng's Blog</title>
+  <title>[Paper Note] Interpretable Mammographic Image Classification using Case-Based Reasoning and Deep Learning | Chicheng's Blog</title>
   
 
 
@@ -175,7 +176,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          ProtoPNetOnCXR
+          [Paper Note] Interpretable Mammographic Image Classification using Case-Based Reasoning and Deep Learning
         </h1>
 
         <div class="post-meta">
@@ -211,6 +212,9 @@
         <h1 id="Before-reading"><a href="#Before-reading" class="headerlink" title="Before reading"></a>Before reading</h1><ol>
 <li>This paper is an extention of ProtoPNet [2]. They applied small changes to fit the model on mammographic image classification.</li>
 </ol>
+<p><img src="https://user-images.githubusercontent.com/37566901/187636617-0ae89a55-7c6d-4ed0-bbc8-fce8a9d5f803.png" alt="image"></p>
+<span id="more"></span>
+
 <h1 id="Overview-of-interpretable-AI-algorithm-for-breast-lesions-IAIA-BL"><a href="#Overview-of-interpretable-AI-algorithm-for-breast-lesions-IAIA-BL" class="headerlink" title="Overview of interpretable AI algorithm for breast lesions (IAIA-BL)"></a>Overview of interpretable AI algorithm for breast lesions (IAIA-BL)</h1><p>The same concept of figure is used as the one in ProtoPNet:</p>
 <p><img src="https://user-images.githubusercontent.com/37566901/187564235-d483bfb1-7a48-4158-86e4-87239149d85b.png" alt="image"></p>
 <p>To adapt to a my version:</p>
